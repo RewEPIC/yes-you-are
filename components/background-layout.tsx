@@ -27,7 +27,7 @@ export default function BackgroundLayout({ children, onClick, className }: Reado
         crossOrigin="anonymous"
         className="absolute inset-0 min-w-full min-h-full object-cover -z-10"
       >
-        <source src="/videos/background.mp4" type="video/mp4" />
+        <source src="/yes-you-are/videos/background.mp4" type="video/mp4" />
       </video>
 
       {/* Foreground Content */}

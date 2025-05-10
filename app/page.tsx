@@ -1,8 +1,7 @@
 "use client";
 import BackgroundLayout from "@/components/background-layout";
+import Logo from "@/components/svg/logo";
 import TransitionLayout from "@/components/transition-layout";
-import { baseUrl } from "@/lib/config";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -14,13 +13,14 @@ export default function Home() {
     <TransitionLayout>
       <BackgroundLayout onClick={handleClick}>
 
-        <Image
+        {/* <Image
           priority={true}
           src={`${baseUrl}/images/logo.png`}
           alt="Yes You Are"
           width={246}
           height={246}
-        />
+        /> */}
+        <Logo/>
       </BackgroundLayout>
 
     </TransitionLayout>

@@ -12,14 +12,6 @@ export default function Home() {
   return (
     <TransitionLayout>
       <BackgroundLayout onClick={handleClick}>
-
-        {/* <Image
-          priority={true}
-          src={`${baseUrl}/images/logo.png`}
-          alt="Yes You Are"
-          width={246}
-          height={246}
-        /> */}
         <Logo/>
       </BackgroundLayout>
 

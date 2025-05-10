@@ -15,27 +15,13 @@ export default function BackgroundLayout({ children, onClick, className }: Reado
       type={onClick ? "button" : undefined}
       onClick={onClick}
       className={clsx(
-        "relative w-full h-full flex items-center justify-center overflow-hidden",
-        onClick ? "cursor-pointer" : ""
+        "h-full w-full bg-cover flex items-center justify-center",
+        onClick ? "cursor-pointer" : "",
+        className
       )}
+      style={{ backgroundImage: `url('${baseUrl}/videos/background.gif')` }}
     >
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        crossOrigin="anonymous"
-        className="absolute inset-0 min-w-full min-h-full object-cover -z-10"
-      >
-        {/* <source src="/yes-you-are/videos/background.mp4" type="video/mp4" /> */}
-        <source src={`${baseUrl}/videos/background.mp4`} type="video/mp4" />
-      </video>
-
-      {/* Foreground Content */}
-      <div className={clsx("flex items-center justify-center z-10 w-full h-full", className)}>
         {children}
-      </div>
     </Wrapper>
     // </div>
   );

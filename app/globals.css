@@ -2,7 +2,8 @@
 
 @font-face {
     font-family: "PGGrandcanyon";
-    src: url("/fonts/PG-Grandcanyon.ttf") format("truetype");
+    src: url("/yes-you-are/fonts/pg-grandcanyon.ttf") format("truetype"); 
+    /* src: url("/fonts/pg-grandcanyon.ttf") format("truetype"); */
     font-display: swap;
   }
 

@@ -3,6 +3,7 @@
 import CategoryButton from "@/components/buttons/category-button";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
+import { baseUrl } from "@/lib/config";
 import Image from "next/image";
 import { useState } from "react";
 import ReactModal, { Styles } from "react-modal";
@@ -27,10 +28,10 @@ const customStyles: Styles = {
 };
 
 const categories = [
-    { icon: "/images/shopping/category/home-icon.svg", label: "Home", size: 6 },
-    { icon: "/images/shopping/category/trophy-icon.svg", label: "ความสำเร็จ", size: 6 },
-    { icon: "/images/shopping/category/heart-icon.svg", label: "ความมั่นใจ", size: 5 },
-    { icon: "/images/shopping/category/message-icon.svg", label: "การยอมรับ", size: 5 },
+    { icon: `${baseUrl}/images/shopping/category/home-icon.svg`, label: "Home", size: 6 },
+    { icon: `${baseUrl}/images/shopping/category/trophy-icon.svg`, label: "ความสำเร็จ", size: 6 },
+    { icon: `${baseUrl}/images/shopping/category/heart-icon.svg`, label: "ความมั่นใจ", size: 5 },
+    { icon: `${baseUrl}/images/shopping/category/message-icon.svg`, label: "การยอมรับ", size: 5 },
 ];
 
 ReactModal.setAppElement('#root');
@@ -49,7 +50,7 @@ export default function Shopping() {
     return (
         <TransitionLayout className="flex items-center justify-center">
             <div className="h-full flex flex-col items-start">
-                <Image src="/images/shopping/background.svg" alt="background" width={398} height={224} className="z-10 w-full" />
+                <Image src={`${baseUrl}/images/shopping/background.svg`} alt="background" width={398} height={224} className="z-10 w-full" />
                 <div className="flex z-0">
                     {Array.from({ length: 5 }).map((_, index) => (
                         <div key={"circle-" + index} className="-mt-[45px] size-[84px] rounded-full bg-primary-pink"></div>
@@ -78,7 +79,7 @@ export default function Shopping() {
                                         <Image
                                             className="-mb-[45px] justify-self-center"
                                             key={`item-${startIdx + i}`}
-                                            src={`/images/shopping/items/${category}/${startIdx + i}.svg`}
+                                            src={`${baseUrl}/images/shopping/items/${category}/${startIdx + i}.svg`}
                                             alt="item"
                                             width={80}
                                             height={100}
@@ -95,45 +96,48 @@ export default function Shopping() {
                         SHOPPING
                     </div>
                     {/* Random Section */}
-                    <div className="relative w-full h-[678px] flex flex-col items-center bg-[url('/images/shopping/random/background.svg')] bg-center bg-cover overflow-hidden">
+                    <div 
+                        style={{ backgroundImage: `url('${baseUrl}/images/shopping/random/background.svg')` }}
+                        className={`relative w-full h-[678px] flex flex-col items-center bg-center bg-cover overflow-hidden`}
+                    >
                         {/* Absolute Images (relative to parent now) */}
                         <Image
                             className="absolute bottom-0"
-                            src="/images/shopping/random/card-bottom-center.svg"
+                            src={`${baseUrl}/images/shopping/random/card-bottom-center.svg`}
                             alt="card-bottom-center"
                             width={240}
                             height={240}
                         />
                         <Image
                             className="absolute bottom-0 right-0"
-                            src="/images/shopping/random/card-bottom-right.svg"
+                            src={`${baseUrl}/images/shopping/random/card-bottom-right.svg`}
                             alt="card-bottom-right"
                             width={100}
                             height={100}
                         />
                         <Image
                             className="absolute bottom-0 left-0"
-                            src="/images/shopping/random/card-bottom-left.svg"
+                            src={`${baseUrl}/images/shopping/random/card-bottom-left.svg`}
                             alt="card-bottom-left"
                             width={60}
                             height={60}
                         />  
                         <Image
                             className="absolute top-1/3 bottom-1/3 -translate-y-1/3 right-0"
-                            src="/images/shopping/random/card-top-right.svg"
+                            src={`${baseUrl}/images/shopping/random/card-top-right.svg`}
                             alt="card-top-right"
                             width={90}
                             height={90}
                         />
                         <Image
                             className="absolute top-1/3 bottom-1/3 -translate-y-1/3 left-0"
-                            src="/images/shopping/random/card-top-left.svg"
+                            src={`${baseUrl}/images/shopping/random/card-top-left.svg`}
                             alt="card-top-right"
                             width={80}
                             height={80}
                         />              
                         <main className="space-y-[30px]">
-                            <Image className="pt-[10px]" src="/images/shopping/random/butterfly.svg" alt="butterfly" width={218} height={173} />
+                            <Image className="pt-[10px]" src={`${baseUrl}/images/shopping/random/butterfly.svg`} alt="butterfly" width={218} height={173} />
                             <div className="w-[202px] h-[273px] flex flex-col bg-yellow-card rounded-[10px] shadow-card overflow-hidden">
                                 <div className="flex flex-col flex-1 justify-center items-center space-y-[18px]">
                                     <div className="text-center font-[600] text-[20px] leading-[1.25]">
@@ -170,7 +174,7 @@ export default function Shopping() {
             >
                 <TransitionLayout className="flex flex-col justify-center items-center space-y-[20px]">
                     <div className="h-[99px] overflow-hidden flex items-center">
-                        <Image src="/images/logo.png" alt="logo" width={198} height={99} />
+                        <Image src={`${baseUrl}/images/logo.png`} alt="logo" width={198} height={99} />
                     </div>
                     <div className="text-brownie text-[16px] font-[500] text-center">
                         <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>

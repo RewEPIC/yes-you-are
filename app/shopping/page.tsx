@@ -173,7 +173,7 @@ export default function Shopping() {
                 style={customStyles}
             >
                 <div className="h-[99px] overflow-hidden flex items-center">
-                    <Image src="/images/logo.svg" alt="logo" width={198} height={99} />
+                    <Image src="/images/logo.png" alt="logo" width={198} height={99} />
                 </div>
                 <div className="text-brownie text-[16px] font-[500] text-center">
                     <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>

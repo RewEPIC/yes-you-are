@@ -15,7 +15,7 @@ export default function Home() {
 
         <Image
           priority={true}
-          src="/images/logo.svg"
+          src="/images/logo.png"
           alt="Yes You Are"
           width={246}
           height={246}

@@ -2,6 +2,7 @@
 
 import CategoryButton from "@/components/buttons/category-button";
 import PinkText from "@/components/text/pink-text";
+import TransitionLayout from "@/components/transition-layout";
 import Image from "next/image";
 import { useState } from "react";
 import ReactModal, { Styles } from "react-modal";
@@ -13,12 +14,7 @@ const customStyles: Styles = {
     },
     content: {
         zIndex: 99,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
         border: '1px solid #3D3A38',
-        gap: "20px",
         borderRadius: '16px',
         height: "480px",
         width: "320px",
@@ -51,7 +47,7 @@ export default function Shopping() {
     }
 
     return (
-        <div className="flex items-center justify-center">
+        <TransitionLayout className="flex items-center justify-center">
             <div className="h-full flex flex-col items-start">
                 <Image src="/images/shopping/background.svg" alt="background" width={398} height={224} className="z-10 w-full" />
                 <div className="flex z-0">
@@ -172,24 +168,26 @@ export default function Shopping() {
                 isOpen={modalIsOpen}
                 style={customStyles}
             >
-                <div className="h-[99px] overflow-hidden flex items-center">
-                    <Image src="/images/logo.png" alt="logo" width={198} height={99} />
-                </div>
-                <div className="text-brownie text-[16px] font-[500] text-center">
-                    <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>
-                    <div>
-                        <PinkText
-                            text="ชิ้นเดียวเท่านั้น"
-                            shadowTextClassName="hidden"
-                            textClassName="font-bai-jamjuree text-[16px]"
-                        />คิดให้ดีก่อนตัดสินใจ
+                <TransitionLayout className="flex flex-col justify-center items-center space-y-[20px]">
+                    <div className="h-[99px] overflow-hidden flex items-center">
+                        <Image src="/images/logo.png" alt="logo" width={198} height={99} />
                     </div>
-                    <div>อะไรคือสิ่งที่เธอต้องการมากที่สุดตอนนี้”</div>
-                </div>
-                <button onClick={handleCloseModal} className="cursor-pointer bg-primary-dark-gray py-[6px] px-[33px] text-white rounded-[16px]">
-                    ตกลง
-                </button>
+                    <div className="text-brownie text-[16px] font-[500] text-center">
+                        <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>
+                        <div>
+                            <PinkText
+                                text="ชิ้นเดียวเท่านั้น"
+                                shadowTextClassName="hidden"
+                                textClassName="font-bai-jamjuree text-[16px]"
+                            />คิดให้ดีก่อนตัดสินใจ
+                        </div>
+                        <div>อะไรคือสิ่งที่เธอต้องการมากที่สุดตอนนี้”</div>
+                    </div>
+                    <button onClick={handleCloseModal} className="cursor-pointer bg-primary-dark-gray py-[6px] px-[33px] text-white rounded-[16px]">
+                        ตกลง
+                    </button>
+                </TransitionLayout>
             </ReactModal>
-        </div>
+        </TransitionLayout>
     );
 }

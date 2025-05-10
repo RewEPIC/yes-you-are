@@ -10,8 +10,9 @@ export default function Home() {
     router.push("/intro");
   }
   return (
-    <BackgroundLayout onClick={handleClick}>
-      <TransitionLayout>
+    <TransitionLayout>
+      <BackgroundLayout onClick={handleClick}>
+
         <Image
           priority={true}
           src="/images/logo.svg"
@@ -19,7 +20,8 @@ export default function Home() {
           width={246}
           height={246}
         />
-      </TransitionLayout>
-    </BackgroundLayout>
+      </BackgroundLayout>
+
+    </TransitionLayout>
   );
 }

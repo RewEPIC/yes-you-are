@@ -24,6 +24,7 @@ export default function BackgroundLayout({ children, onClick, className }: Reado
         muted
         loop
         controls={false}
+        playsInline
         className={"absolute inset-0 w-full h-full object-cover -z-10"}
       >
         <source src="/videos/background.mp4" type="video/mp4" />

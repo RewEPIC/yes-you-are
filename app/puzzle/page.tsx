@@ -9,7 +9,7 @@ export default function Puzzle() {
         router.push("/look")
     }
     return (
-        <BackgroundLayout className="flex flex-col items-center justify-end p-[50px]">
+        <BackgroundLayout className="flex flex-col items-center justify-end py-[100px]">
             <div className="space-y-[22px] text-center">
                 <PinkButton onClick={handleSubmit}/>
                 <div className="text-brownie text-shadow-custom text-[14px] font-[500]">เลือกชิ้นส่วนเพื่อไปต่อ</div>

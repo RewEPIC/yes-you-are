@@ -15,8 +15,8 @@ export default function Intro() {
   }
 
   return (
-    <BackgroundLayout>
-      <TransitionLayout className="flex flex-col items-center space-y-[19px]">
+    <TransitionLayout>
+      <BackgroundLayout className="flex flex-col items-center space-y-[19px]">
         <div className="font-pg text-[24px] leading-none text-brownie">
           <span className="text-shadow-custom">อยากให้เราเรียก</span>
           <PinkText text="ชื่อเธอ" containerClassName="text-[24px]" />
@@ -30,7 +30,7 @@ export default function Intro() {
           placeholder="ใส่คำตอบของคุณ.."
         />
         <PinkButton onClick={handleSubmit} />
-      </TransitionLayout>
-    </BackgroundLayout>
+      </BackgroundLayout>
+    </TransitionLayout>
   )
 }

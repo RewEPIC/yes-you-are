@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 function HeartSeperate() {
     return (
-        <div className="flex flex-col items-center justify-center space-y-[10px]">
+        <div className="flex flex-col items-center justify-center space-y-[10px] ">
             <div className="flex space-x-[51px]">
                 <Tag className="px-[10px]" text="ได้เป็นตัวของตัวเอง" />
                 <Tag className="px-[23.5px]" text="ร่างทอง" />
@@ -55,7 +55,7 @@ export default function Confidence() {
     const [page, setPage] = useState(0);
     const controls = useAnimation();
     const router = useRouter()
-    
+
     // Use animation controls for more reliable transitions
     useEffect(() => {
         // Animate to the current page position
@@ -68,12 +68,12 @@ export default function Confidence() {
             }
         });
     }, [page, controls]);
-    
+
     // Handle submission logic
     const handleSubmit = () => {
         router.push("/puzzle")
     };
-    
+
     // Handle drag end with reliable transition
     const handleDragEnd = (event: MouseEvent, info: PanInfo) => {
         // Apply page change based on drag offset
@@ -102,49 +102,49 @@ export default function Confidence() {
                     <PinkText text="ความมั่นใจ" containerClassName="text-[24px]" textClassName="to-pink-red" />
                     <span className="text-shadow-custom">แล้วเธอนึกถึงอะไร</span>
                 </div>
-                
-                <div className="overflow-hidden w-full relative">
-                    <motion.div
-                        className="flex w-[200%]"
-                        animate={controls}
-                        initial={{ x: "0%" }}
-                        drag="x"
-                        dragConstraints={{ left: 0, right: 0 }}
-                        dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-                        dragElastic={0.2}
-                        onDragEnd={handleDragEnd}
-                    >
-                        <div className="w-1/2 flex flex-col items-center justify-center">
-                            <HeartSeperate />
-                        </div>
-                        <div className="w-1/2 flex flex-col items-center justify-center">
-                            <div className="relative text-center">
-                                <Image className="drop-shadow-lg" draggable="false" src="/svg/heart.svg" alt="Heart" width={340} height={265.5}/>
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[36px] font-[500]">ตัวเธอเอง</div>
+
+                <div className="flex flex-col w-full">
+                    <div className="overflow-hidden relative">
+                        <motion.div
+                            className="flex w-[200%]"
+                            animate={controls}
+                            initial={{ x: "0%" }}
+                            drag="x"
+                            onDragEnd={handleDragEnd}
+                        >
+                            <div className="w-1/2 flex flex-col items-center justify-center">
+                                <HeartSeperate />
                             </div>
+                            <div className="w-1/2 flex flex-col items-center justify-center">
+                                <div className="relative text-center">
+                                    <Image className="drop-shadow-lg" draggable="false" src="/svg/heart.svg" alt="Heart" width={340} height={265.5} />
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[36px] font-[500]">ตัวเธอเอง</div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                <div className="space-y-[83px]">
+                    <div className="flex flex-col items-center space-y-[12px]">
+                        <div className="flex space-x-[11px]">
+                            <button
+                                onClick={() => setPage(0)}
+                                className={`size-[10px] rounded-full cursor-pointer ${page === 0 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`}
+                            />
+                            <button
+                                onClick={() => setPage(1)}
+                                className={`size-[10px] rounded-full cursor-pointer ${page === 1 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`}
+                            />
                         </div>
-                    </motion.div>
+                        <div className="font-400 text-[15px] text-primary-gray">
+                            {page === 0 ? "ปัดซ้ายเพื่อดูเพิ่ม" : "ปัดขวาเพื่อกลับ"}
+                        </div>
+                    </div>
+                    <PinkButton onClick={handleSubmit} />
                 </div>
             </div>
-            
-            <div className="space-y-[83px]">
-                <div className="flex flex-col items-center space-y-[12px]">
-                    <div className="flex space-x-[11px]">
-                        <button 
-                            onClick={() => setPage(0)}
-                            className={`size-[10px] rounded-full cursor-pointer ${page === 0 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`} 
-                        />
-                        <button 
-                            onClick={() => setPage(1)}
-                            className={`size-[10px] rounded-full cursor-pointer ${page === 1 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`}
-                        />
-                    </div>
-                    <div className="font-400 text-[15px] text-primary-gray">
-                        {page === 0 ? "ปัดซ้ายเพื่อดูเพิ่ม" : "ปัดขวาเพื่อกลับ"}
-                    </div>
-                </div>
-                <PinkButton onClick={handleSubmit} />
-            </div>
+
         </BackgroundLayout>
     );
 }

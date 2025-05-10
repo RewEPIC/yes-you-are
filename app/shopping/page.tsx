@@ -4,9 +4,9 @@ import CategoryButton from "@/components/buttons/category-button";
 import PinkText from "@/components/text/pink-text";
 import Image from "next/image";
 import { useState } from "react";
-import ReactModal from "react-modal";
+import ReactModal, { Styles } from "react-modal";
 
-const customStyles = {
+const customStyles: Styles = {
     overlay: {
         zIndex: 99,
         backgroundColor: "rgba(0, 0, 0, 0.25)",
@@ -46,7 +46,9 @@ export default function Shopping() {
     const handleCloseModal = () => {
         setModalIsOpen(false);
     }
+    const handleRandomClick = () => {
 
+    }
 
     return (
         <div className="flex items-center justify-center">
@@ -74,17 +76,19 @@ export default function Shopping() {
                     {/* Shelf Sections */}
                     {[0, 3].map((startIdx) => (
                         <div key={`shelf-${startIdx}`} className="w-full">
-                            <div className="bg-amber-200 grid grid-cols-3 self-center justify-self-center space-x-[48px]">
-                                {Array.from({ length: 3 }).map((_, i) => ((startIdx + i <= categories[category].size - 1) && 
-                                    <Image
-                                        className="-mb-[45px]"
-                                        key={`item-${startIdx + i}`}
-                                        src={`/images/shopping/items/${category}/${startIdx + i}.svg`}
-                                        alt="item"
-                                        width={80}
-                                        height={100}
-                                    />
-                                ))}
+                            <div className="flex justify-center items-center w-full">
+                                <div className="grid grid-cols-3 gap-x-[48px]">
+                                    {Array.from({ length: 3 }).map((_, i) => ((startIdx + i <= categories[category].size - 1) && 
+                                        <Image
+                                            className="-mb-[45px] justify-self-center"
+                                            key={`item-${startIdx + i}`}
+                                            src={`/images/shopping/items/${category}/${startIdx + i}.svg`}
+                                            alt="item"
+                                            width={80}
+                                            height={100}
+                                        />
+                                    ))}
+                                </div>
                             </div>
                             <div className="border-y-[2px] border-primary-pink bg-shelf-cream w-full h-[53px]" />
                             <div className="bg-primary-pink w-full h-[18px]"></div>
@@ -140,7 +144,12 @@ export default function Shopping() {
                                         <div>ให้เราเลือกสินค้า</div>
                                         <div>ที่เหมาะกับคุณ</div>
                                     </div>
-                                    <div className="font-itim text-center bg-pink-light-2 rounded-[14px] text-white w-[59px] h-[28px]">สุ่ม</div>
+                                    <button 
+                                        onClick={handleRandomClick}
+                                        className="font-itim text-center bg-pink-light-2 rounded-[14px] text-white w-[59px] h-[28px] cursor-pointer"
+                                    >
+                                        สุ่ม
+                                    </button>
                                 </div>
                                 <div className="flex flex-col items-center justify-center h-[100px] bg-pink-card space-y-[5px]">
                                     <div className="font-[600] text-[13px]">สุ่มตามประเภทที่สนใจ</div>
@@ -162,7 +171,6 @@ export default function Shopping() {
             <ReactModal
                 isOpen={modalIsOpen}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
                 <div className="h-[99px] overflow-hidden flex items-center">
                     <Image src="/images/logo.svg" alt="logo" width={198} height={99} />

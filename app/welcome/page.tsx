@@ -3,10 +3,17 @@ import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
 import PinkText from "@/components/text/pink-text";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Welcome() {
     const router = useRouter()
-    const name = localStorage.getItem("name")
+    const [name, setName] = useState<string | null>(null);
+
+    useEffect(() => {
+        const storedName = localStorage.getItem("name");
+        setName(storedName);
+    }, []);
+
     const handleSubmit = () => {
         router.push("/confidence")
     }

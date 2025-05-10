@@ -17,7 +17,7 @@ export default function RootLayout({
       <body
         className={`${baiJamjuree.variable} ${itim.variable} ${pgGrandCanyon.variable} font-bai-jamjuree antialiased`}
       >
-        <div id="root" className="h-screen w-96 mx-auto">
+        <div id="root" className="h-screen w-96 mx-auto overflow-x-hidden">
           {children}
         </div>
       </body>

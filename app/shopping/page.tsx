@@ -1,6 +1,7 @@
 "use client";
 
 import CategoryButton from "@/components/buttons/category-button";
+import Logo from "@/components/svg/logo";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
 import { baseUrl } from "@/lib/config";
@@ -174,7 +175,7 @@ export default function Shopping() {
             >
                 <TransitionLayout className="flex flex-col justify-center items-center space-y-[20px]">
                     <div className="h-[99px] overflow-hidden flex items-center">
-                        <Image src={`${baseUrl}/images/logo.png`} alt="logo" width={198} height={99} />
+                        <Logo size={198} />
                     </div>
                     <div className="text-brownie text-[16px] font-[500] text-center">
                         <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>

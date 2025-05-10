@@ -3,6 +3,7 @@ import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
 import TransitionLayout from "@/components/transition-layout";
 import { pgGrandCanyon } from "@/lib/font";
+import { isTextEmpty } from "@/lib/text-util";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ export default function Look() {
     const [look, setLook] = useState("");
     const router = useRouter();
     const handleSubmit = () => {
+        if (isTextEmpty(look, "กรุณากรอกคำตอบของคุณ")) return
         localStorage.setItem("look", look);
         router.push("/shopping");
     }

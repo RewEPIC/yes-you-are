@@ -1,7 +1,11 @@
 
-export default function Logo() {
+interface LogoProps {
+    size?: number;
+}
+
+export default function Logo({ size = 246 }: Readonly<LogoProps>) {
     return (
-        <svg width="246" height="246" viewBox="0 0 246 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={size} height={size} viewBox="0 0 246 246" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="246" height="246" fill="url(#pattern0_3546_127)" />
             <defs>
                 <pattern id="pattern0_3546_127" patternContentUnits="objectBoundingBox" width="1" height="1">

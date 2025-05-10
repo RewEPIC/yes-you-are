@@ -4,6 +4,7 @@ import PinkButton from "@/components/buttons/pink-button";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
 import { pgGrandCanyon } from "@/lib/font";
+import { isTextEmpty } from "@/lib/text-util";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ export default function Intro() {
   const router = useRouter()
   const [name, setName] = useState<string>("")
   const handleSubmit = () => {
+    if (isTextEmpty(name, "กรุณากรอกชื่อของคุณ")) return
     localStorage.setItem("name", name)
     router.push("/welcome")
   }

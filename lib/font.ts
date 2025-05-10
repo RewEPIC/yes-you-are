@@ -17,6 +17,6 @@ export const itim = Itim({
 })
 export const pgGrandCanyon = localFont ({
   variable: "--font-pg-grandcanyon",
-  src: "../public/fonts/pg-grandcanyon.ttf",
+  src: "./fonts/pg-grandcanyon.ttf",
   display: "swap",
 })

@@ -3,6 +3,7 @@ import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
+import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -23,7 +24,7 @@ export default function Welcome() {
             <BackgroundLayout>
                 <div className="flex flex-col items-center space-y-[40px]">
                     <div className="space-y-[18px] text-center">
-                        <div className="font-pg text-[48px] text-brownie">ยินดีต้อนรับ</div>
+                        <div className={`${pgGrandCanyon.className} text-[48px] text-brownie`}>ยินดีต้อนรับ</div>
                         <PinkText text={name} containerClassName="text-[24px]" textClassName="to-pink-red"/>
                     </div>
                     <div className="space-y-[10px] flex flex-col items-center">

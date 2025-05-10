@@ -4,6 +4,7 @@ import PinkButton from "@/components/buttons/pink-button";
 import Tag from "@/components/container/tag";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
+import { pgGrandCanyon } from "@/lib/font";
 import { motion, PanInfo, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -99,7 +100,7 @@ export default function Confidence() {
         <TransitionLayout>
             <BackgroundLayout className="flex flex-col space-y-[79px] overflow-hidden">
                 <div className="flex flex-col items-center justify-center space-y-[47px]">
-                    <div className="font-pg -space-x-0.5 text-brownie">
+                    <div className={`${pgGrandCanyon.className} -space-x-0.5 text-brownie`}>
                         <span className="text-shadow-custom">พูดถึง</span>
                         <PinkText text="ความมั่นใจ" containerClassName="text-[24px]" textClassName="to-pink-red" />
                         <span className="text-shadow-custom">แล้วเธอนึกถึงอะไร</span>

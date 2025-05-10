@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-    font-family: "PGGrandcanyon";
-    src: url("/yes-you-are/fonts/pg-grandcanyon.ttf") format("truetype"); 
-    /* src: url("/fonts/pg-grandcanyon.ttf") format("truetype"); */
-    font-display: swap;
-  }
-
 @theme {
     --color-shelf-cream:  #FFEFE7;
     --color-primary-dark-gray: #404040;
@@ -29,7 +22,7 @@
     --color-pink-card: #FCE9E7;
     --font-bai-jamjuree: var(--font-bai-jamjuree);
     --font-itim: var(--font-itim);
-    --font-pg: "PGGrandcanyon";
+    --font-pg: var(--font-pg-grandcanyon);
     --text-shadow-custom: 0px 1px 0.3px rgba(0, 0, 0, 0.13);
     --shadow-pink: 0px 2px 2.3px #F19EC2;
     --shadow-pink-light: 0px 1px 2.3px #FCD2E3;

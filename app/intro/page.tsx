@@ -3,6 +3,7 @@ import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
+import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,7 +18,7 @@ export default function Intro() {
   return (
     <TransitionLayout>
       <BackgroundLayout className="flex flex-col items-center space-y-[19px]">
-        <div className="font-pg text-[24px] leading-none text-brownie">
+        <div className={`${pgGrandCanyon.className} text-[24px] leading-none text-brownie`}>
           <span className="text-shadow-custom">อยากให้เราเรียก</span>
           <PinkText text="ชื่อเธอ" containerClassName="text-[24px]" />
           <span className="text-shadow-custom">ว่าอะไรดี?</span>

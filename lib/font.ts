@@ -1,4 +1,5 @@
 import { Bai_Jamjuree, Itim } from "next/font/google";
+import localFont from "next/font/local";
 
 export const baiJamjuree = Bai_Jamjuree({
   variable: "--font-bai-jamjuree",
@@ -13,4 +14,9 @@ export const itim = Itim({
   display: "swap",
   weight: ["400"],
   style: ["normal"],
+})
+export const pgGrandCanyon = localFont ({
+  variable: "--font-pg-grandcanyon",
+  src: "/../public/fonts/pg-grandcanyon.ttf",
+  display: "swap",
 })

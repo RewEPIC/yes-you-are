@@ -2,6 +2,7 @@
 import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
 import TransitionLayout from "@/components/transition-layout";
+import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -16,7 +17,7 @@ export default function Look() {
         <TransitionLayout>
             <BackgroundLayout className="flex flex-col justify-end py-[90px] space-y-[260px]">
                 <div className="flex flex-col items-center space-y-[19px]">
-                    <div className="font-pg text-[18px]">อยากให้คนอื่นมองเห็นเธอแบบไหน</div>
+                    <div className={`${pgGrandCanyon.className} text-[18px]`}>อยากให้คนอื่นมองเห็นเธอแบบไหน</div>
                     <input
                         type="text"
                         value={look}

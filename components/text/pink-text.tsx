@@ -1,3 +1,4 @@
+import { pgGrandCanyon } from "@/lib/font";
 import clsx from "clsx";
 
 interface PinkTextProps {
@@ -9,7 +10,7 @@ interface PinkTextProps {
 
 export default function PinkText({ containerClassName, shadowTextClassName, textClassName, text = "ชื่อเธอ" }: Readonly<PinkTextProps>) {
     return (
-        <span className={clsx("font-pg relative inline-block text-[18px]", containerClassName)}>
+        <span className={clsx(`${pgGrandCanyon.className} relative inline-block text-[18px]`, containerClassName)}>
             <span
                 className={clsx("px-1 absolute left-0 top-[1px] text-brownie opacity-[13%] pointer-events-none select-none", shadowTextClassName)}
                 aria-hidden="true"

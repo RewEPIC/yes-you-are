@@ -1,4 +1,4 @@
-import { baiJamjuree, itim } from "@/lib/font";
+import { baiJamjuree, itim, pgGrandCanyon } from "@/lib/font";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${baiJamjuree.variable} ${itim.variable} font-bai-jamjuree antialiased`}
+        className={`${baiJamjuree.variable} ${itim.variable} ${pgGrandCanyon.variable} font-bai-jamjuree antialiased`}
       >
         <div id="root" className="h-screen w-96 mx-auto">
           {children}

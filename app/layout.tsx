@@ -1,11 +1,18 @@
 import { baiJamjuree, itim, pgGrandCanyon } from "@/lib/font";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Yes You Are",
   description: "Yes You Are is a web application that helps you to find your true self.",
 };
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
+  maximumScale: 1,
+  viewportFit: "cover",
+}
 
 export default function RootLayout({
   children,
@@ -15,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${baiJamjuree.variable} ${itim.variable} ${pgGrandCanyon.variable} font-bai-jamjuree antialiased`}
+        className={`${baiJamjuree.variable} ${itim.variable} ${pgGrandCanyon.variable} w-screen h-screen font-bai-jamjuree antialiased`}
       >
-        <div id="root" className="h-screen w-96 mx-auto overflow-x-hidden">
+        <div id="root" className="w-full h-full max-w-md mx-auto">
           {children}
         </div>
       </body>

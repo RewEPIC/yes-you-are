@@ -12,6 +12,7 @@
     "@types/react-modal": "^3.16.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.10.5",
+    "lottie-react": "^2.4.1",
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

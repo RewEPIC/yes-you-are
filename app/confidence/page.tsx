@@ -1,60 +1,18 @@
 "use client";
+import Heart from "@/app/confidence/(module)/heart";
+import HeartSeperate, { CheckedItem } from "@/app/confidence/(module)/heart-seperate";
 import BackgroundLayout from "@/components/background-layout";
 import PinkButton from "@/components/buttons/pink-button";
-import Tag from "@/components/container/tag";
 import PinkText from "@/components/text/pink-text";
 import TransitionLayout from "@/components/transition-layout";
 import { pgGrandCanyon } from "@/lib/font";
 import { motion, PanInfo, useAnimation } from "framer-motion";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function HeartSeperate() {
-    return (
-        <div className="flex flex-col items-center justify-center space-y-[10px] ">
-            <div className="flex space-x-[51px]">
-                <Tag className="px-[10px]" text="ได้เป็นตัวของตัวเอง" />
-                <Tag className="px-[23.5px]" text="ร่างทอง" />
-            </div>
-            <div className="flex space-x-[12px]">
-                <Tag text="กล้าแสดงออก" />
-                <Tag text="การเชื่อในตัวเอง" />
-                <Tag text="เมคอัพ" />
-                <Tag text="ไม่กลัวทัวร์ลง" />
-            </div>
-            <div className="flex space-x-[18px]">
-                <Tag text="สเน่ห์แรงเกินต้าน" />
-                <Tag text="เจ้าแม่แฟชั่น" />
-                <Tag text="ลง IG No Filter" />
-                <Tag text="โนสนโนแคร์" />
-            </div>
-            <div className="flex space-x-[12px]">
-                <Tag text="หน้าสดออกจากบ้าน" />
-                <Tag text="ตัวเองตอนเด็ก" />
-                <Tag className="px-[22px]" text="Meitu" />
-                <Tag text="หุ่นสุดแซ่บ" />
-            </div>
-            <div className="flex space-x-[16px]">
-                <Tag text="ตัวแม่ตัวมัม" />
-                <Tag text="ตัวเองในเวอร์ชันที่เริ่ดกว่า" />
-                <Tag text="ดาวติ้กต่อก" />
-            </div>
-            <div className="flex space-x-[14px]">
-                <Tag text="เป้าหมายมีไว้พุ่งชน" />
-                <Tag text="ไม่มีความลังเล" />
-            </div>
-            <div className="flex space-x-[4px]">
-                <Tag text="ความท้าทาย" />
-                <Tag text="ความหวัง" />
-            </div>
-            <Tag text="ความรัก" />
-        </div>
-    )
-}
-
 export default function Confidence() {
     const [page, setPage] = useState(0);
+    const [checkedItems, setCheckedItems] = useState<CheckedItem>({})
     const controls = useAnimation();
     const router = useRouter()
 
@@ -116,13 +74,10 @@ export default function Confidence() {
                                 onDragEnd={handleDragEnd}
                             >
                                 <div className="w-1/2 flex flex-col items-center justify-center">
-                                    <HeartSeperate />
+                                    <HeartSeperate checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                                 </div>
                                 <div className="w-1/2 flex flex-col items-center justify-center">
-                                    <div className="relative text-center">
-                                        <Image className="drop-shadow-lg" draggable="false" src="/svg/heart.svg" alt="Heart" width={340} height={265.5} />
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[36px] font-[500]">ตัวเธอเอง</div>
-                                    </div>
+                                    <Heart checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                                 </div>
                             </motion.div>
                         </div>

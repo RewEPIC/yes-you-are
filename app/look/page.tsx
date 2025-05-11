@@ -17,7 +17,7 @@ export default function Look() {
     }
     return (
         <TransitionLayout>
-            <BackgroundLayout className="flex flex-col justify-end py-[90px] space-y-[260px]">
+            <BackgroundLayout className="flex flex-col justify-end py-[100px] space-y-[260px]">
                 <div className="flex flex-col items-center space-y-[19px]">
                     <div className={`${pgGrandCanyon.className} text-[18px]`}>อยากให้คนอื่นมองเห็นเธอแบบไหน</div>
                     <input

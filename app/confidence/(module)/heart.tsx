@@ -23,7 +23,11 @@ export default function Heart({ checkedItems, setCheckedItems }: Readonly<HeartP
                 onChange={(e) => handleChange(e.target.checked)}
                 className="sr-only"
             />
-            <div className={"drop-shadow-lg transition-opacity"}>
+            <div 
+                className={`
+                        drop-shadow-lg transition-all duration-300 ease-in-out
+                        ${checked ? "scale-100 opacity-100" : "scale-95 opacity-80"}
+                `}>
                 {checked ? 
                     <HeartActive width={356} height={282} /> : 
                     <HeartInactive width={340} height={266} />

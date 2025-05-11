@@ -12,7 +12,7 @@ export default function TransitionLayout({ children, className }: Readonly<Trans
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.6 }}
+            transition={{ duration: 0.6 }}
             className={clsx("w-full h-full", className)}
         >
             {children}

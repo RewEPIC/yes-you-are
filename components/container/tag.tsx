@@ -21,7 +21,7 @@ export default function Tag({ id, text, className, checked, onChange }: Readonly
         <label
             htmlFor={id}
             className={clsx(
-                "inline-flex items-center w-fit cursor-pointer border rounded-[20px] px-[9px] py-[5px] font-[400] text-[10px]",
+                "transition-all ease-in-out duration-200 inline-flex items-center w-fit cursor-pointer border rounded-[20px] px-[9px] py-[5px] font-[400] text-[10px]",
                 checked ?
                     "bg-gradient-to-b from-pink-light via-yellow-card to-blue-light border-pink-light-2 shadow-pink-dark" :
                     "shadow-pink-light border-pink-light",

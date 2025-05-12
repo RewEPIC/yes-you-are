@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+    --color-blue: #C5E8FE;
     --color-blue-light: #E1F3FF;
     --color-shelf-cream:  #FFEFE7;
     --color-primary-dark-gray: #404040;
@@ -19,6 +20,8 @@
     --color-gray-light: #E3E3E3;
     --color-yellow-light: #FEF8FA;
     --color-yellow: #FFEDCB;
+    --color-yellow-item-card: #FFF0D9;
+    --color-white-item-card: #FDFBF1;
     --color-yellow-card: #FCF6E9;
     --color-pink-card: #FCE9E7;
     --font-bai-jamjuree: var(--font-bai-jamjuree);
@@ -31,5 +34,6 @@
     --shadow-pink-light: 0px 1px 2.3px #FCD2E3;
     --shadow-category: 0px 2px 2.7px -2px rgba(0,0,0,0.99);
     --shadow-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    --drop-shadow-heart: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.25));
+    --shadow-big-card: 0px 4px 6.4px -3px rgba(0, 0, 0, 0.25);
+    --drop-shadow-heart: 0px 3px 10px rgba(0, 0, 0, 0.25);
 }

@@ -1,15 +1,42 @@
+// shopping/page.tsx
 "use client";
 
+import ShoppingShelf from "@/app/shopping/(module)/shopping-shelf";
+import ShuffleCards from "@/app/shopping/(module)/shuffle-card";
 import CategoryButton from "@/components/buttons/category-button";
+import ShoppingBrand from "@/components/container/shopping-brand";
+import TransitionLayout from "@/components/motion/transition-layout";
 import Logo from "@/components/svg/logo";
 import PinkText from "@/components/text/pink-text";
-import TransitionLayout from "@/components/transition-layout";
+import { useModal } from "@/hook/useModal";
 import { baseUrl } from "@/lib/config";
+import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ReactModal, { Styles } from "react-modal";
 
-const customStyles: Styles = {
+const shuffleModalStyles: Styles = {
+    overlay: {
+        zIndex: 99,
+        backgroundColor: "rgba(0, 0, 0, 0.25)",
+    },
+    content: {
+        zIndex: 99,
+        background: "transparent",
+        // inset: 0,
+        border: "none",
+        height: "100%",
+        width: "28rem",
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        transform: 'translate(-50%, -50%)',
+    }
+}
+
+const modalStyles: Styles = {
     overlay: {
         zIndex: 99,
         backgroundColor: "rgba(0, 0, 0, 0.25)",
@@ -38,30 +65,37 @@ const categories = [
 ReactModal.setAppElement('#root');
 
 export default function Shopping() {
-    const [modalIsOpen, setModalIsOpen] = useState(true);
+    const shoppingModal = useModal(true);
+    const shuffleModal = useModal();
     const [category, setCategory] = useState(0);
+    const router = useRouter()
 
     const handleCloseModal = () => {
-        setModalIsOpen(false);
+        shoppingModal.close();
     }
     const handleRandomClick = () => {
+        shuffleModal.open()
+    }
+    const handleShuffleModalClose = () => {
+        shuffleModal.close()
+    }
 
+    const handleOpenShopping = () => {
+        router.push("/shopping/items")
+    }
+    const handleCategoryClick = (index: number) => {
+        setCategory(index);
     }
 
     return (
-        <TransitionLayout>
-            <Image 
-                priority={true} 
-                className="z-10 w-full"
-                src={`${baseUrl}/images/shopping/shopping-brand.png`} 
-                alt="background" 
-                width={400} height={224} 
-            />
+        <>
+            <ShoppingBrand />
             <div className="flex">
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div key={"circle-" + index} className="-z-10 -mt-[50px] size-[84px] rounded-full bg-primary-pink"></div>
                 ))}
             </div>
+            {/* Category */}
             <div className="pt-[16px] flex flex-col items-center justify-center space-y-[19px]" >
                 <div className="text-black font-[700] text-[14px]">เลือกหมวดหมู่ที่เธอต้องการ</div>
                 <div className="flex space-x-[17px]">
@@ -69,39 +103,42 @@ export default function Shopping() {
                         <CategoryButton
                             key={label}
                             active={index === category}
-                            onClick={() => setCategory(index)}
+                            onClick={() => handleCategoryClick(index)}
                         >
-                            <Image priority={true} src={icon} alt={label} width={40} height={40} />
+                            <Image priority={true} src={icon} alt={label} width={40} height={40} quality={80} />
                             <div className="text-[11px] font-[500]">{label}</div>
                         </CategoryButton>
                     ))}
                 </div>
                 {/* Shelf Sections */}
-                {[0, 3].map((startIdx) => (
-                    <div key={`shelf-${startIdx}`} className="w-full">
-                        <div className="flex justify-center items-center">
-                            <div className="grid grid-cols-3 gap-x-[48px]">
-                                {Array.from({ length: 3 }).map((_, i) => ((startIdx + i <= categories[category].size - 1) &&
-                                    <Image
-                                        loading="lazy"
-                                        className="-mb-[45px] justify-self-center"
-                                        key={`item-${startIdx + i}`}
-                                        src={`${baseUrl}/images/shopping/items/${category}/${startIdx + i}.png`}
-                                        alt="item"
-                                        width={80}
-                                        height={100}
+                <div className="relative overflow-x-hidden w-full"> {/* Adjust height as needed */}
+                    <div
+                        className="flex transition-transform duration-1000 ease-in-out"
+                        style={{
+                            transform: `translateX(-${category * 100}%)`,
+                            width: `${categories.length + 1 * 100}%`,
+                        }}
+                    >
+                        {categories.map((cat, idx) => (
+                            <div key={`shelf-group-${idx}-${cat.label}`} className="w-full shrink-0">
+                                {[0, 3].map((startIdx) => (
+                                    <ShoppingShelf
+                                        key={`shelf-${idx}-${startIdx}`}
+                                        category={idx}
+                                        size={cat.size}
+                                        startIdx={startIdx}
                                     />
                                 ))}
                             </div>
-                        </div>
-                        <div className="border-y-[2px] border-primary-pink bg-shelf-cream h-[53px]" />
-                        <div className="bg-primary-pink h-[18px]"></div>
+                        ))}
                     </div>
-                ))}
-                {/* Shopping */}
-                <div className="bg-primary-pink rounded-[3px] w-[97px] h-[28px] flex items-center justify-center text-white font-[700] text-[13px]">
-                    SHOPPING
                 </div>
+                {/* Shopping Button */}
+                <button
+                    onClick={handleOpenShopping}
+                    className="cursor-pointer bg-primary-pink rounded-[3px] w-[97px] h-[28px] flex items-center justify-center text-white font-[700] text-[13px]">
+                    SHOPPING
+                </button>
                 {/* Random Section */}
                 <div
                     style={{ backgroundImage: `url('${baseUrl}/images/shopping/random/shopping-background.png')` }}
@@ -109,52 +146,58 @@ export default function Shopping() {
                 >
                     {/* Absolute Images (relative to parent now) */}
                     <Image
-                        loading="lazy"
-                        className="absolute -bottom-32 drop-shadow-red"
+                        priority={true}
+                        className="absolute -bottom-34 drop-shadow-red"
                         src={`${baseUrl}/images/shopping/random/card-bottom-center.png`}
                         alt="card-bottom-center"
                         width={220}
                         height={173}
+                        quality={80}
                     />
                     <Image
-                        loading="lazy"
-                        className="absolute -bottom-12 -right-32 drop-shadow-red"
+                        priority={true}
+                        className="absolute -bottom-12 -right-36 drop-shadow-red"
                         src={`${baseUrl}/images/shopping/random/card-bottom-right.png`}
                         alt="card-bottom-right"
                         width={220}
                         height={173}
+                        quality={80}
                     />
                     <Image
-                        loading="lazy"
+                        priority={true}
                         className="absolute -bottom-12 -left-42 drop-shadow-red"
                         src={`${baseUrl}/images/shopping/random/card-bottom-left.png`}
                         alt="card-bottom-left"
                         width={220}
                         height={173}
+                        quality={80}
                     />
                     <Image
-                        loading="lazy"
-                        className="absolute top-1/3 bottom-1/3 -translate-y-1/3 -right-32 drop-shadow-red"
+                        priority={true}
+                        className="absolute top-1/3 bottom-1/3 -translate-y-1/3 -right-36 drop-shadow-red"
                         src={`${baseUrl}/images/shopping/random/card-top-right.png`}
                         alt="card-top-right"
                         width={220}
                         height={173}
+                        quality={80}
                     />
                     <Image
-                        loading="lazy"
-                        className="absolute top-1/3 bottom-1/3 -translate-y-1/3 -left-32 drop-shadow-red"
+                        priority={true}
+                        className="absolute top-1/3 bottom-1/3 -translate-y-1/3 -left-38 drop-shadow-red"
                         src={`${baseUrl}/images/shopping/random/card-top-left.png`}
                         alt="card-top-right"
                         width={220}
                         height={173}
+                        quality={80}
                     />
                     <main className="space-y-[30px]">
                         <div className="flex justify-center items-center h-[200px] overflow-hidden">
-                            <Image 
-                                loading="lazy"
-                                className="pt-[10px] drop-shadow-red" 
-                                src={`${baseUrl}/images/shopping/random/butterfly.png`} 
-                                alt="butterfly" width={220} height={173} 
+                            <Image
+                                priority={true}
+                                className="pt-[10px] drop-shadow-red"
+                                src={`${baseUrl}/images/shopping/random/butterfly.png`}
+                                alt="butterfly" width={220} height={173}
+                                quality={80}
                             />
                         </div>
                         <div className="w-[202px] h-[273px] flex flex-col bg-yellow-card rounded-[10px] shadow-card overflow-hidden">
@@ -175,7 +218,7 @@ export default function Shopping() {
                                 <div className="flex space-x-[6px]">
                                     {categories.slice(1).map(({ icon, label }) => (
                                         <div className="flex flex-col items-center" key={label}>
-                                            <Image loading="lazy" src={icon} alt={label} width={40} height={40} />
+                                            <Image loading="lazy" src={icon} alt={label} width={40} height={40} quality={80} />
                                             <div className="text-[11px] font-[500]">{label}</div>
                                         </div>
                                     ))}
@@ -186,30 +229,54 @@ export default function Shopping() {
                 </div>
             </div>
 
-            <ReactModal
-                isOpen={modalIsOpen}
-                style={customStyles}
-            >
-                <TransitionLayout className="flex flex-col justify-center items-center space-y-[20px]">
-                    <div className="h-[99px] overflow-hidden flex items-center">
-                        <Logo size={198} />
-                    </div>
-                    <div className="text-brownie text-[16px] font-[500] text-center">
-                        <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>
-                        <div>
-                            <PinkText
-                                text="ชิ้นเดียวเท่านั้น"
-                                shadowTextClassName="hidden"
-                                textClassName="font-bai-jamjuree text-[16px]"
-                            />คิดให้ดีก่อนตัดสินใจ
-                        </div>
-                        <div>อะไรคือสิ่งที่เธอต้องการมากที่สุดตอนนี้”</div>
-                    </div>
-                    <button onClick={handleCloseModal} className="cursor-pointer bg-primary-dark-gray py-[6px] px-[33px] text-white rounded-[16px]">
-                        ตกลง
-                    </button>
-                </TransitionLayout>
-            </ReactModal>
-        </TransitionLayout>
+            {/* Modal */}
+            <AnimatePresence>
+                {shoppingModal.isOpen && (
+                    <ReactModal
+                        id="shopping-modal"
+                        isOpen={shoppingModal.isOpen}
+                        style={modalStyles}
+                        onRequestClose={handleCloseModal}
+                        // closeTimeoutMS={300}
+                    >
+                            <TransitionLayout className="flex flex-col justify-center items-center space-y-[20px]">
+                                <div className="h-[99px] overflow-hidden flex items-center">
+                                    <Logo size={198} />
+                                </div>
+                                <div className="text-brownie text-[16px] font-[500] text-center">
+                                    <div>“เธอสามารถเลือกซื้อสินค้าได้แค่</div>
+                                    <div>
+                                        <PinkText
+                                            text="ชิ้นเดียวเท่านั้น"
+                                            shadowTextClassName="hidden"
+                                            textClassName="font-bai-jamjuree text-[16px]"
+                                        />คิดให้ดีก่อนตัดสินใจ
+                                    </div>
+                                    <div>อะไรคือสิ่งที่เธอต้องการมากที่สุดตอนนี้”</div>
+                                </div>
+                                <button onClick={handleCloseModal} className="cursor-pointer bg-primary-dark-gray py-[6px] px-[33px] text-white rounded-[16px]">
+                                    ตกลง
+                                </button>
+                            </TransitionLayout>
+                    </ReactModal>
+                )}
+            </AnimatePresence>
+            {/* Shuffle Modal */}
+            <AnimatePresence>
+                {shuffleModal.isOpen && (
+                    <ReactModal
+                    id="shuffle-modal"
+                    isOpen={shuffleModal.isOpen}
+                    style={shuffleModalStyles}
+                    onRequestClose={handleShuffleModalClose}
+                    closeTimeoutMS={300}
+                >
+                    <TransitionLayout className="w-full h-full flex justify-center items-end">
+                        <ShuffleCards />
+                    </TransitionLayout>
+                </ReactModal>
+                )}
+            </AnimatePresence>
+        </>
     );
 }

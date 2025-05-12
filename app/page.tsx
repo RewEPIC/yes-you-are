@@ -1,20 +1,25 @@
 "use client";
 import BackgroundLayout from "@/components/background-layout";
 import Logo from "@/components/svg/logo";
-import TransitionLayout from "@/components/transition-layout";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const router = useRouter();
-  const handleClick = () => {
-    router.push("/intro");
-  }
-  return (
-    <TransitionLayout>
-      <BackgroundLayout onClick={handleClick}>
-        <Logo/>
-      </BackgroundLayout>
+  const router = useRouter()
+  const [intro, setIntro] = useState(false)
 
-    </TransitionLayout>
+  useEffect(() => {
+    if (intro) return
+    const timer = setTimeout(() => {
+        setIntro(true)
+        router.push("/intro/splash")
+    }, 100)
+    return () => clearTimeout(timer);
+  }, [router, intro])
+
+  return (
+    <BackgroundLayout>
+      <Logo/>
+    </BackgroundLayout>
   );
 }

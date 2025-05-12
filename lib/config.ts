@@ -1,2 +1,2 @@
 
-export const baseUrl = "/yes-you-are"
+export const baseUrl = ""

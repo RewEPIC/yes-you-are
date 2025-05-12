@@ -5,7 +5,6 @@ interface ShoppingLayoutProps {
 }
 
 export default function ShoppingItemsLayout({ children }: Readonly<ShoppingLayoutProps>) {
-
   return (
     <SlideTransition>
         {children}

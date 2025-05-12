@@ -27,9 +27,6 @@ const categories = [
     },
 ]
 const categoriesProduct = [
-    // ["รองเท้าก้าวหน้า", "ล็อตเตอรี่มีโชค", "ใบเกียรตินิยม", "บัตรขึ้นเงินเดือน", "บัตรเปลื่ยนงาน", "บัตรเลื่อนตำแหน่ง"],
-    // ["ปากกาเกรด A", "ยาเม็ดมั่นใจ", "กล้องภาคภูมิใจ", "น้ำยากล้าพูด", "หูฟังเบาใจ", "กระจกวิเศษ"],
-    // ["มงกุฏแห่งการยอมรับ","บัตรอภิชาตบุตร","สมุดบันทึกความดี","Friendship Bracelet","กุญแจเปิดทาง","เครื่องรางให้อภัยตนเอง"]
     [products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position],
     [products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror],
     [products.crown, products.card, products.book, products.bracelet, products.amulet]

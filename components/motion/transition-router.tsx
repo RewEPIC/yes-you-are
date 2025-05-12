@@ -1,19 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion"
-import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime"
-import { useSelectedLayoutSegment } from "next/navigation"
-import { useContext, useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion";
+import { LayoutRouterContext } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { useSelectedLayoutSegment } from "next/navigation";
+import { useContext, useEffect, useRef, useState } from "react";
 
 function usePreviousValue<T>(value: T): T | undefined {
-    const prevValue = useRef<T | undefined>(undefined)
-
+    const prevRef = useRef<T | undefined>(undefined);
     useEffect(() => {
-        prevValue.current = value
-        return () => {
-            prevValue.current = undefined
-        }
-    })
-
-    return prevValue.current
+        prevRef.current = value;
+    }, [value]);
+    return prevRef.current;
 }
 
 function FrozenRouter(props: Readonly<{ children: React.ReactNode }>) {
@@ -24,12 +19,14 @@ function FrozenRouter(props: Readonly<{ children: React.ReactNode }>) {
     const segment = useSelectedLayoutSegment()
     const prevSegment = usePreviousValue(segment)
 
-    const changed = segment !== prevSegment && segment !== undefined && prevSegment !== undefined
+    const changed = Boolean(segment !== prevSegment && segment !== undefined && prevSegment !== undefined)
 
     // Ensure that the code only runs after hydration (on the client)
     useEffect(() => {
-        setIsClient(true)
-    }, [])
+        const timeout = setTimeout(() => setIsClient(true), 10);
+        return () => clearTimeout(timeout);
+    }, []);
+    
 
     if (!isClient) {
         return null // Render nothing until client-side hydration

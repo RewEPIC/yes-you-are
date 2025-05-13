@@ -1,22 +1,21 @@
 "use client";
 
-import BackgroundLayout from "@/components/background-layout";
 import TransitionLayout from "@/components/motion/transition-layout";
 import Logo from "@/components/svg/logo";
-import { products } from "@/lib/dictionary/products";
-import { useEffect, useMemo, useState } from "react";
+// import { products } from "@/lib/dictionary/products";
+import { useEffect, useState } from "react";
 
-const categoriesProduct = [
-    [products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position],
-    [products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror],
-    [products.crown, products.card, products.book, products.bracelet, products.amulet]
-]
+// const categoriesProduct = [
+//     [products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position],
+//     [products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror],
+//     [products.crown, products.card, products.book, products.bracelet, products.amulet]
+// ]
 import Image from "next/image";
 import PinkButton from "@/components/buttons/pink-button";
-export default function result() {
+export default function Result() {
 
-    const [category, setCategory] = useState(0)
-    const currentProduct = categoriesProduct[category]
+    // const [category, setCategory] = useState(0)
+    // const currentProduct = categoriesProduct[category]
     const [name, setName] = useState<string | null>(null);
 
    useEffect(() => {
@@ -70,8 +69,3 @@ export default function result() {
         </TransitionLayout>
     );
 }
-
-function setName(storedName: string | null) {
-    throw new Error("Function not implemented.");
-}
-

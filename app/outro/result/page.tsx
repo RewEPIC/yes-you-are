@@ -33,14 +33,14 @@ export default function Result() {
             />
             <div className="h-[54px] w-[328px] bg-white rounded-[16px] shadow-blue z-10" />
             <div className="absolute h-[54px] w-[328px] top-[27px] bg-pink-light-2 -z-10 rounded-[16px]"></div>
-            <div className="flex flex-col justify-center items-center bg-white w-[291px] h-fit pt-[39px] pb-[49px] space-y-[16px]">
+            <div className="flex flex-col justify-center items-center bg-white w-[291px] h-[745px] pt-[30px] pb-[49px] space-y-[16px]">
                 <SmallLogoBlack width={140} height={69} />
                 <div className="flex flex-col justify-center items-center gap-6  px-10">
                     <div className="text-[14px] font-[400]" >ขอมอบสิ่งนี้ให้แก่  {name}</div>
                     <Image loading="lazy" src={product.image} alt={product.name} width={104} height={130} />
                     <div className="flex flex-col text-center items-center space-y-[6px]">
                         <div className="text-[20px] font-[600]">{product.name}</div>
-                        <div className="font-[300] text-[12px] py-[10px]">
+                        <div className="font-[300] text-[11px] py-[10px]">
                             {product.description.map((desc, index) => (
                                 <div key={`line-${index}-${desc.at(0)}`}>{desc}</div>
                             ))}

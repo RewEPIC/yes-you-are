@@ -6,23 +6,21 @@ import { useMemo, useState } from "react";
 
 import FadedTransition from "@/components/motion/faded-transition";
 import Arrow from "@/components/svg/icon/arrow";
+import { baseUrl } from "@/lib/config";
 import { products } from "@/lib/dictionary/products";
-import HeartIcon from "@/public/images/shopping/category/heart-icon.svg";
-import MessageIcon from "@/public/images/shopping/category/message-icon.svg";
-import TrophyIcon from "@/public/images/shopping/category/trophy-icon.svg";
 import Link from "next/link";
 
 const categories = [
     {
-        icon: TrophyIcon,
+        icon: `${baseUrl}/images/shopping/category/trophy-icon.png`,
         label: "ความสำเร็จ",
     },
     {
-        icon: HeartIcon,
+        icon: `${baseUrl}/images/shopping/category/heart-icon.png`,
         label: "ความมั่นใจ",
     },
     {
-        icon: MessageIcon,
+        icon: `${baseUrl}/images/shopping/category/message-icon.png`,
         label: "การยอมรับ",
     },
 ]
@@ -54,7 +52,7 @@ export default function ItemsPage() {
                         <div className="text-center text-white font-[600] text-[20px]">สินค้าทั้งหมด</div>
                         {/* Category */}
                         <FadedTransition motionKey={category}>
-                            <currentCategory.icon className="absolute right-2 bottom-0 w-[68px] h-[68px]" />
+                            <Image src={currentCategory.icon} width={68} height={68} alt={currentCategory.label} className="absolute right-2 bottom-0" />
                         </FadedTransition>
                     </div>
                     {/* Navigation */}
@@ -90,7 +88,6 @@ export default function ItemsPage() {
                                 href={`/shopping/items/${currentProduct[index].id}`}
                                 className="cursor-pointer h-full flex flex-col bg-gradient-to-b from-white-item-card to-yellow-item-card rounded-[8px] shadow-card">
                                 <div className="flex flex-1 justify-center">
-                                    {/* <Image src={`${baseUrl}/images/shopping/items/${category + 1}/${index}.svg`} alt="heart" width={107} height={134} /> */}
                                     <Image loading="lazy" src={currentProduct[index].image} alt={currentProduct[index].name} className="w-[120px] h-[140px]" width={540} height={675} />
                                 </div>
                                 <div className="p-[12px]">

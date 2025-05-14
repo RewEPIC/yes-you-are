@@ -264,7 +264,7 @@ export default function Shopping() {
             </AnimatePresence>
             {/* Shuffle Modal */}
             <AnimatePresence>
-                {shuffleModal.isOpen && !shoppingModal.isOpen && <ReactModal
+                <ReactModal
                     key="shuffle-modal"
                     id="shuffle-modal"
                     isOpen={shuffleModal.isOpen}
@@ -275,7 +275,7 @@ export default function Shopping() {
                         <ShuffleCards onClick={handleShuffleClick} />
                         <div className={`${pgGrandCanyon.className} text-white text-[20px] text-shadow-lg`}>กดที่การ์ดตรงกลางเพื่อสุ่ม</div>
                     </TransitionLayout>
-                </ReactModal>}
+                </ReactModal>
             </AnimatePresence>
         </>
     );

@@ -19,4 +19,5 @@ export const pgGrandCanyon = localFont ({
   variable: "--font-pg-grandcanyon",
   src: "./fonts/pg-grandcanyon.ttf",
   display: "swap",
+  preload: true
 })

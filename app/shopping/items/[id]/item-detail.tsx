@@ -37,7 +37,7 @@ export default function ItemDetailClient() {
                     <div className="flex items-center h-[48px] gap-x-[8px]"><Flower width="32" height="32" /> {product.tags.flower}</div>
                     <div className="flex items-center h-[48px] gap-x-[8px]"><Star width="32" height="32" /> {product.tags.star}</div>
                 </div>
-                <div className="space-y-[14px] pb-[46px]">
+                <div className="space-y-[14px] pb-[30px]">
                     <div className="flex items-center gap-x-[9px] font-[600] text-[15px]">
                         <div>คำอธิบายสินค้า</div>
                         <div className="flex-1 h-px bg-black" />
@@ -48,7 +48,7 @@ export default function ItemDetailClient() {
                         ))}
                     </div>
                 </div>
-                <Link href={`/shopping/items/${id}/buy`} className="flex justify-center">
+                <Link href={`/shopping/items/${id}/buy`} className="flex justify-center pb-[35px]">
                     <PinkButton name="สั่งซื้อ" />
                 </Link>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 import { CheckedItem } from "@/app/intro/confidence/(module)/heart-seperate";
+import KonvaPuzzleButton from "@/app/intro/puzzle/(module)/puzzle-button";
 import PinkButton from "@/components/buttons/pink-button";
-import MaskedClickableImage from "@/components/masked-image";
 import { baseUrl } from "@/lib/config";
 import { pgGrandCanyon } from "@/lib/font";
 import clsx from "clsx";
@@ -21,25 +21,40 @@ interface PuzzleButtonProps {
 function PuzzleButton({ label, src, id, checkedItems, handleChange, className }: Readonly<PuzzleButtonProps>) {
     const isChecked = checkedItems?.[id] ?? false;
     return (
-        <div
-            className={clsx(
-                "z-90 w-[287px] h-[287px] cursor-pointer flex items-center justify-center transition ease-in-out duration-200",
+        <div className={
+            clsx(
+                "pointer-events-auto h-[287px] w-[287px] flex items-center justify-center transition ease-in-out duration-200",
                 isChecked ? "" : "grayscale",
                 className
-            )}
-        >
-            <MaskedClickableImage
+            )
+        }>
+            <KonvaPuzzleButton
+                src={src} // must be a transparent PNG
                 width={287}
                 height={287}
-                autoDetectMask={true}
-                backgroundImage={src}
-                onMaskClick={() => handleChange(id, !isChecked)}
-                fillColor="transparent"
-                strokeColor="transparent"
-                className="absolute w-full h-full"
+                onClick={() => handleChange(id, !isChecked)}
             />
             {label}
         </div>
+        // <div
+        //     className={clsx(
+        //         "z-90 w-[287px] h-[287px] pointer-events-auto cursor-pointer flex items-center justify-center transition ease-in-out duration-200",
+        //         isChecked ? "" : "grayscale",
+        //         className
+        //     )}
+        // >
+        //     <MaskedClickableImage
+        //         width={287}
+        //         height={287}
+        //         autoDetectMask={true}
+        //         backgroundImage={src}
+        //         onMaskClick={() => handleChange(id, !isChecked)}
+        //         fillColor="transparent"
+        //         strokeColor="transparent"
+        //         className="absolute w-full h-full"
+        //     />
+        //     {label}
+        // </div>
     )
 }
 

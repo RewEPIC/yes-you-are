@@ -62,7 +62,7 @@ export default function ItemBuyClient() {
                     <div className="bg-gray-box rounded-[8px] h-[32px] flex items-center justify-center px-[20px]">{product.tags.lip}</div>
                     <div className="bg-gray-box rounded-[8px] h-[32px] flex items-center justify-center px-[20px]">{product.tags.flower}</div>
                 </div>
-                <div className="pt-[45px] flex space-x-[9px]">
+                <div className="pt-[45px] flex space-x-[9px] pb-[35px]">
                     <GrayButton name="ยังก่อน" onClick={handleClickBack}/>
                     <PinkButton name="แน่ใจ" className="!shadow-none" onClick={handleClickOutro}/>
                 </div>

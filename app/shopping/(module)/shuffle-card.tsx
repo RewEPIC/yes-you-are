@@ -68,15 +68,15 @@ export default function ShuffleCards({ onClick }: Readonly<ShuffleCardsProps>) {
       setTimeout(() => {
         setIsFlipped(!isFlipped);
         setIsSpinning(false);
-      }, 500); // Animation completes in 600ms
+      }, 1600); // Animation completes in 600ms
     }
   };
 
   const rotateY = () => {
     if (isSpinning)
-      return [0, 720] //x = 0, y = 720
+      return [0, 1080] //x = 0, y = 720
     else if (isFlipped)
-      return 540 //x = 540, y = 0
+      return 900 //x = 540, y = 0
     else
       return 0 //x = 0, y = 0
   }
@@ -112,7 +112,7 @@ export default function ShuffleCards({ onClick }: Readonly<ShuffleCardsProps>) {
               y: Math.abs(offset) * 10,
             }}
             transition={isCenterCard && isSpinning ? 
-              { rotateY: { duration: 0.6, ease: "easeInOut" } } : 
+              { rotateY: { duration: 1.6, ease: "easeInOut" } } : 
               { type: 'spring', stiffness: 200, damping: 25 }
             }
             onClick={isCenterCard ? handleClick : undefined}

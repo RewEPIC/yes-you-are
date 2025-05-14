@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // basePath: "/yes-you-are",
   output: "export",
-  images: { unoptimized: true },
+  // images: { unoptimized: true },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: [{
             loader: '@svgr/webpack',
-            options: { dimensions: false, icon: true }
+            options: { dimensions: false }
         }],
       },
     )

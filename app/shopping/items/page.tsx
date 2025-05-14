@@ -29,7 +29,7 @@ const categories = [
 const categoriesProduct = [
     [products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position],
     [products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror],
-    [products.crown, products.card, products.book, products.bracelet, products.amulet]
+    [products.crown, products.card, products.book, products.bracelet, products.key, products.amulet]
 ]
 
 export default function ItemsPage() {
@@ -91,7 +91,7 @@ export default function ItemsPage() {
                                 className="cursor-pointer h-full flex flex-col bg-gradient-to-b from-white-item-card to-yellow-item-card rounded-[8px] shadow-card">
                                 <div className="flex flex-1 justify-center">
                                     {/* <Image src={`${baseUrl}/images/shopping/items/${category + 1}/${index}.svg`} alt="heart" width={107} height={134} /> */}
-                                    <Image loading="lazy" src={currentProduct[index].image} alt={currentProduct[index].name} className="w-[120px] h-[140px]" width={1080} height={1350} />
+                                    <Image loading="lazy" src={currentProduct[index].image} alt={currentProduct[index].name} className="w-[120px] h-[140px]" width={540} height={675} />
                                 </div>
                                 <div className="p-[12px]">
                                     <div className="font-[300] text-[10px]">ความสำเร็จ</div>

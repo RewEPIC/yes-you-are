@@ -10,10 +10,11 @@ import Logo from "@/components/svg/logo";
 import PinkText from "@/components/text/pink-text";
 import { useModal } from "@/hook/useModal";
 import { baseUrl } from "@/lib/config";
+import { pgGrandCanyon } from "@/lib/font";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import ReactModal, { Styles } from "react-modal";
 
 const shuffleModalStyles: Styles = {
@@ -70,15 +71,16 @@ export default function Shopping() {
     const [category, setCategory] = useState(0);
     const router = useRouter()
 
-    const handleCloseModal = () => {
-        shoppingModal.close();
-    }
     const handleRandomClick = () => {
         shuffleModal.open()
     }
-    const handleShuffleModalClose = () => {
-        shuffleModal.close()
-    }
+    const handleCloseModal = useCallback(() => {
+        shoppingModal.close();
+      }, [shoppingModal]);
+      
+      const handleShuffleModalClose = useCallback(() => {
+        shuffleModal.close();
+      }, [shuffleModal]);
 
     const handleOpenShopping = () => {
         router.push("/shopping/items")
@@ -86,6 +88,10 @@ export default function Shopping() {
     const handleCategoryClick = (index: number) => {
         setCategory(index);
     }
+    const handleShuffleClick = useCallback((id: string) => {
+        shuffleModal.close()
+        router.push(`/shopping/items/${id}`)
+    }, [shuffleModal, router])
 
     return (
         <>
@@ -151,8 +157,7 @@ export default function Shopping() {
                         src={`${baseUrl}/images/shopping/random/card-bottom-center.png`}
                         alt="card-bottom-center"
                         width={220}
-                        height={173}
-                        quality={80}
+                        height={180}
                     />
                     <Image
                         priority={true}
@@ -160,8 +165,7 @@ export default function Shopping() {
                         src={`${baseUrl}/images/shopping/random/card-bottom-right.png`}
                         alt="card-bottom-right"
                         width={220}
-                        height={173}
-                        quality={80}
+                        height={180}
                     />
                     <Image
                         priority={true}
@@ -169,8 +173,7 @@ export default function Shopping() {
                         src={`${baseUrl}/images/shopping/random/card-bottom-left.png`}
                         alt="card-bottom-left"
                         width={220}
-                        height={173}
-                        quality={80}
+                        height={180}
                     />
                     <Image
                         priority={true}
@@ -178,8 +181,7 @@ export default function Shopping() {
                         src={`${baseUrl}/images/shopping/random/card-top-right.png`}
                         alt="card-top-right"
                         width={220}
-                        height={173}
-                        quality={80}
+                        height={180}
                     />
                     <Image
                         priority={true}
@@ -187,8 +189,7 @@ export default function Shopping() {
                         src={`${baseUrl}/images/shopping/random/card-top-left.png`}
                         alt="card-top-right"
                         width={220}
-                        height={173}
-                        quality={80}
+                        height={180}
                     />
                     <main className="space-y-[30px]">
                         <div className="flex justify-center items-center h-[200px] overflow-hidden">
@@ -196,8 +197,9 @@ export default function Shopping() {
                                 priority={true}
                                 className="pt-[10px] drop-shadow-red"
                                 src={`${baseUrl}/images/shopping/random/butterfly.png`}
-                                alt="butterfly" width={220} height={173}
-                                quality={80}
+                                alt="butterfly" 
+                                width={220} 
+                                height={180}
                             />
                         </div>
                         <div className="w-[202px] h-[273px] flex flex-col bg-yellow-card rounded-[10px] shadow-card overflow-hidden">
@@ -218,7 +220,7 @@ export default function Shopping() {
                                 <div className="flex space-x-[6px]">
                                     {categories.slice(1).map(({ icon, label }) => (
                                         <div className="flex flex-col items-center" key={label}>
-                                            <Image loading="lazy" src={icon} alt={label} width={40} height={40} quality={80} />
+                                            <Image loading="lazy" src={icon} alt={label} width={40} height={40} />
                                             <div className="text-[11px] font-[500]">{label}</div>
                                         </div>
                                     ))}
@@ -231,8 +233,8 @@ export default function Shopping() {
 
             {/* Modal */}
             <AnimatePresence>
-                {shoppingModal.isOpen && (
-                    <ReactModal
+                   {shoppingModal.isOpen && !shuffleModal.isOpen && <ReactModal
+                    key="shopping-modal"
                         id="shopping-modal"
                         isOpen={shoppingModal.isOpen}
                         style={modalStyles}
@@ -258,24 +260,22 @@ export default function Shopping() {
                                     ตกลง
                                 </button>
                             </TransitionLayout>
-                    </ReactModal>
-                )}
+                    </ReactModal>}
             </AnimatePresence>
             {/* Shuffle Modal */}
             <AnimatePresence>
-                {shuffleModal.isOpen && (
-                    <ReactModal
+                {shuffleModal.isOpen && !shoppingModal.isOpen && <ReactModal
+                    key="shuffle-modal"
                     id="shuffle-modal"
                     isOpen={shuffleModal.isOpen}
                     style={shuffleModalStyles}
                     onRequestClose={handleShuffleModalClose}
-                    closeTimeoutMS={300}
                 >
-                    <TransitionLayout className="w-full h-full flex justify-center items-end">
-                        <ShuffleCards />
+                    <TransitionLayout className="w-full h-full flex flex-col justify-center items-center">
+                        <ShuffleCards onClick={handleShuffleClick} />
+                        <div className={`${pgGrandCanyon.className} text-white text-[20px] text-shadow-lg`}>กดที่การ์ดตรงกลางเพื่อสุ่ม</div>
                     </TransitionLayout>
-                </ReactModal>
-                )}
+                </ReactModal>}
             </AnimatePresence>
         </>
     );

@@ -26,7 +26,6 @@ function FrozenRouter(props: Readonly<{ children: React.ReactNode }>) {
         const timeout = setTimeout(() => setIsClient(true), 10);
         return () => clearTimeout(timeout);
     }, []);
-    
 
     if (!isClient) {
         return null // Render nothing until client-side hydration
@@ -41,6 +40,7 @@ function FrozenRouter(props: Readonly<{ children: React.ReactNode }>) {
 
 interface LayoutTransitionProps {
     children: React.ReactNode
+    motionKey?: string
     className?: React.ComponentProps<typeof motion.div>["className"]
     style?: React.ComponentProps<typeof motion.div>["style"]
     initial: React.ComponentProps<typeof motion.div>["initial"]
@@ -51,6 +51,7 @@ interface LayoutTransitionProps {
 }
 
 export function LayoutTransition({
+    motionKey,
     children,
     className,
     style,
@@ -67,7 +68,7 @@ export function LayoutTransition({
             <motion.div
                 className={className}
                 style={style}
-                key={segment}
+                key={motionKey ?? segment}
                 initial={initial}
                 animate={animate}
                 exit={exit}

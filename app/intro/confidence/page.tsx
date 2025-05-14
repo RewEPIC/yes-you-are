@@ -63,7 +63,7 @@ export default function Confidence() {
                 </div>
 
                 <div className="flex flex-col w-full">
-                    <div className="overflow-hidden relative">
+                    <div className="relative">
                         <motion.div
                             className="flex w-[200%]"
                             animate={controls}

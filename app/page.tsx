@@ -13,7 +13,7 @@ export default function Home() {
     const timer = setTimeout(() => {
         setIntro(true)
         router.push("/intro/splash")
-    }, 100)
+    }, 200)
     return () => clearTimeout(timer);
   }, [router, intro])
 

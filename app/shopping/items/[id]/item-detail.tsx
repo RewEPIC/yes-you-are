@@ -9,20 +9,26 @@ import Face from "@/public/images/icon/face-add-svgrepo-com.svg"
 import Flower from "@/public/images/icon/flower-beauty-pretty-nature-svgrepo-com.svg"
 import Lip from "@/public/images/icon/lips-beauty-pretty-sex-svgrepo-com.svg"
 import Star from "@/public/images/icon/star.svg"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 export default function ItemDetailClient() {
     const { id } = useParams<{ id: string }>()
+    const router = useRouter()
     const product = products[id as keyof typeof products]
     if (!product) return null
+    const handleClickBack = () => {
+        router.back()
+    }
     return (
-        <div className="relative w-full h-full bg-white">
-            <div className="relative w-full h-[400px] rounded-b-[120px] bg-primary-pink/40 flex items-center justify-center">
-                <Image src={product.image} alt={product.name} className="w-auto h-[400px] z-20" width={1080} height={1350} quality={80} />
+        <div className="relative w-full h-full bg-white flex flex-col">
+            <div className="w-full h-[40px] pt-[50px] bg-primary-pink/40 z-10 flex items-center justify-center">
+                <button onClick={handleClickBack} className="absolute left-6 bg-white rounded-full size-[40px] flex items-center justify-center">
+                    <Arrow color="#FB6E80" width="20" height="20" />
+                </button>
             </div>
-            <Link href="/shopping/items" className="absolute top-8 left-6 bg-white rounded-full size-[40px] flex items-center justify-center">
-                <Arrow color="#FB6E80" width="20" height="20" />
-            </Link>
+            <div className="z-0 relative w-full h-[360px] rounded-b-[160px] bg-primary-pink/40 flex items-end justify-center">
+                <Image loading="lazy" src={product.image} alt={product.name} className="w-[250px] h-auto z-20" width={540} height={675} />
+            </div>
             <div className="px-[30px] pt-[21px]">
                 <div className="font-[600] text-[36px] text-center pb-[12px]">{product.name}</div>
                 <div className="grid grid-cols-2 gap-x-[50px] gap-y-[8px] font-[400] text-[13px] pb-[27px]">
@@ -42,7 +48,9 @@ export default function ItemDetailClient() {
                         ))}
                     </div>
                 </div>
-                <div className="flex justify-center"><PinkButton name="สั่งซื้อ" /></div>
+                <Link href={`/shopping/items/${id}/buy`} className="flex justify-center">
+                    <PinkButton name="สั่งซื้อ" />
+                </Link>
             </div>
         </div>
     )

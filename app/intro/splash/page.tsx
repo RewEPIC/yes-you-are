@@ -4,7 +4,7 @@ import Logo from "@/components/svg/logo";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Splash() {
     const router = useRouter()
     const [intro, setIntro] = useState(false)
 

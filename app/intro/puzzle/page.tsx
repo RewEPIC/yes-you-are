@@ -23,7 +23,7 @@ function PuzzleButton({ label, src, id, checkedItems, handleChange, className }:
     return (
         <div
             className={clsx(
-                "w-[287px] h-[287px] cursor-pointer flex items-center justify-center transition ease-in-out duration-200",
+                "z-90 w-[287px] h-[287px] cursor-pointer flex items-center justify-center transition ease-in-out duration-200",
                 isChecked ? "" : "grayscale",
                 className
             )}

@@ -298,8 +298,8 @@ export default function MaskedClickableImage({
       
       {/* Loading indicator when auto-detecting mask */}
       {autoDetectMask && !isImageLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-50">
-          <div className="text-blue-600">Detecting mask areas...</div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          {/* <div className="text-blue-600"></div> */}
         </div>
       )}
       

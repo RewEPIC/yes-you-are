@@ -2,15 +2,23 @@ import { CheckedItem } from "@/app/intro/confidence/(module)/heart-seperate";
 import HeartIcon from "@/public/svgs/heart.svg";
 import { Dispatch, SetStateAction } from "react";
 interface HeartProps {
+    isDragging: boolean
     checkedItems: CheckedItem
     setCheckedItems: Dispatch<SetStateAction<CheckedItem>>
 }
 
-export default function Heart({ checkedItems, setCheckedItems }: Readonly<HeartProps>) {
+export default function Heart({ isDragging, checkedItems, setCheckedItems }: Readonly<HeartProps>) {
     const id = "big-self"
     const checked = checkedItems?.[id] ?? false
     const handleChange = (checked: boolean) => {
-        setCheckedItems((prev) => ({ ...prev, [id]: checked }))
+        if (isDragging) return
+        setCheckedItems((prev) => {
+            const updated = { ...prev, [id]: checked };
+            if (!checked) {
+                delete (updated as Partial<typeof updated>)[id];
+            }
+            return updated;
+        });
     }
     return (
         <label htmlFor={id} className="relative cursor-pointer inline-block">

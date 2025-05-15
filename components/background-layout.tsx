@@ -28,7 +28,7 @@ export default function BackgroundLayout({ children, onClick, className }: Reado
       )}
     >
       {/* Fallbackk */}
-      <Image
+      {!lottieLoaded && <Image
         priority={true}
         src={`${baseUrl}/images/background.png`}
         alt="Background"
@@ -38,7 +38,7 @@ export default function BackgroundLayout({ children, onClick, className }: Reado
           "absolute top-0 left-0 object-cover w-full h-full -z-10 transition-opacity duration-500",
           lottieLoaded ? "opacity-0" : "opacity-100"
         )}
-      />
+      />}
       <Lottie 
         loop={true} 
         autoplay={true}

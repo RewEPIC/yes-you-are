@@ -48,7 +48,7 @@ export default function ItemDetailClient() {
                         ))}
                     </div>
                 </div>
-                <Link href={`/shopping/items/${id}/buy`} className="flex justify-center pb-[35px]">
+                <Link href={`/shopping/items/${id}/buy`} className="flex justify-center pb-[40px]">
                     <PinkButton name="สั่งซื้อ" />
                 </Link>
             </div>

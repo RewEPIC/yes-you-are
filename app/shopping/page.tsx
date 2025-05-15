@@ -10,7 +10,7 @@ import Logo from "@/components/svg/logo";
 import PinkText from "@/components/text/pink-text";
 import { useModal } from "@/hook/useModal";
 import { baseUrl } from "@/lib/config";
-import { pgGrandCanyon } from "@/lib/font";
+import { products } from "@/lib/dictionary/products";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -56,11 +56,33 @@ const modalStyles: Styles = {
     },
 };
 
+
+
 const categories = [
-    { icon: `${baseUrl}/images/shopping/category/home-icon.png`, label: "Home", size: 6 },
-    { icon: `${baseUrl}/images/shopping/category/trophy-icon.png`, label: "ความสำเร็จ", size: 6 },
-    { icon: `${baseUrl}/images/shopping/category/heart-icon.png`, label: "ความมั่นใจ", size: 5 },
-    { icon: `${baseUrl}/images/shopping/category/message-icon.png`, label: "การยอมรับ", size: 5 },
+    { 
+        icon: `${baseUrl}/images/shopping/category/home-icon.png`, label: "Home", products: [
+            products.amulet, products.pill, products.book,
+            products.camera, products.card, products.key
+        ] 
+    },
+    { 
+        icon: `${baseUrl}/images/shopping/category/trophy-icon.png`, label: "ความสำเร็จ", products: [
+            products.shoes, products.certificate, products.lottery, 
+            products.pen, products.salary, products.position
+        ]
+    },
+    { 
+        icon: `${baseUrl}/images/shopping/category/heart-icon.png`, label: "ความมั่นใจ", products: [
+            products.pill, products.headphones, products.potion,
+            products.camera, products.mirror
+        ]   
+    },
+    { 
+        icon: `${baseUrl}/images/shopping/category/message-icon.png`, label: "การยอมรับ", products: [
+            products.book, products.card, products.key,
+            products.bracelet, products.amulet
+        ] 
+    },
 ];
 
 ReactModal.setAppElement('#root');
@@ -126,12 +148,11 @@ export default function Shopping() {
                         }}
                     >
                         {categories.map((cat, idx) => (
-                            <div key={`shelf-group-${idx}-${cat.label}`} className="w-full shrink-0">
+                            <div key={`shelf-group-${idx}-${cat.label}`} className="w-full shrink-0 space-y-[18px]">
                                 {[0, 3].map((startIdx) => (
                                     <ShoppingShelf
                                         key={`shelf-${idx}-${startIdx}`}
-                                        category={idx}
-                                        size={cat.size}
+                                        products={cat.products}
                                         startIdx={startIdx}
                                     />
                                 ))}
@@ -273,7 +294,6 @@ export default function Shopping() {
                 >
                     <TransitionLayout className="w-full h-full flex flex-col justify-center items-center">
                         <ShuffleCards onClick={handleShuffleClick} />
-                        <div className={`${pgGrandCanyon.className} text-white text-[20px] text-shadow-lg`}>กดที่การ์ดตรงกลางเพื่อสุ่ม</div>
                     </TransitionLayout>
                 </ReactModal>
             </AnimatePresence>

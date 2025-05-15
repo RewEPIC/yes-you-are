@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 export default function Confidence() {
     const [page, setPage] = useState(0);
     const [checkedItems, setCheckedItems] = useState<CheckedItem>({})
+    const [isDragging, setIsDragging] = useState(false); // Track drag state
     const controls = useAnimation();
     const router = useRouter()
 
@@ -30,11 +31,22 @@ export default function Confidence() {
 
     // Handle submission logic
     const handleSubmit = () => {
-        router.push("/intro/puzzle")
+        const size = Object.values(checkedItems).filter(Boolean).length
+        if (size <= 0) {
+            alert("ต้องเลือกอย่างน้อย 1 อันนะ");
+        } else if (size > 4) {
+            alert("เลือกได้มากสุด 4 อันเท่านั้นนะ");
+        } else {
+            router.push("/intro/puzzle")
+            localStorage.setItem("confidence", Object.keys(checkedItems).join(","))
+        }
     };
-
+    const handleDragStart = () => { 
+        setIsDragging(true)
+    }
     // Handle drag end with reliable transition
     const handleDragEnd = (event: MouseEvent, info: PanInfo) => {
+        setIsDragging(false)
         // Apply page change based on drag offset
         if (info.offset.x < -50 && page === 0) {
             setPage(1);
@@ -69,13 +81,14 @@ export default function Confidence() {
                             animate={controls}
                             initial={{ x: "0%" }}
                             drag="x"
+                            onDragStart={handleDragStart}
                             onDragEnd={handleDragEnd}
                         >
                             <div className="w-1/2 flex flex-col items-center justify-center">
-                                <HeartSeperate checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
+                                <HeartSeperate isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                             </div>
                             <div className="w-1/2 flex flex-col items-center justify-center">
-                                <Heart checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
+                                <Heart isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                             </div>
                         </motion.div>
                     </div>

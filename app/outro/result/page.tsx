@@ -59,28 +59,31 @@ export default function Result() {
     };
 
     return (
-        <div className="relative w-full flex flex-col justify-start items-center text-primary-dark-gray pb-[40px]">
+        <div className="relative flex flex-col justify-start items-center text-primary-dark-gray">
             <Image
                 priority={true}
                 src={`${baseUrl}/images/result-background.png`}
                 alt="Result Background"
                 width={390}
                 height={844}
-                className={"absolute top-0 left-0 object-cover w-full -z-10"}
+                className={"absolute top-0 left-0 object-cover w-full h-screen min-h-full -z-10"}
             />
             <div className="h-[54px] w-[328px] bg-white rounded-[16px] shadow-blue z-10" />
             <div className="absolute h-[54px] w-[328px] top-[27px] bg-pink-light-2 -z-10 rounded-[16px]" />
-            <ImageCard     
-                name={name}
-                product={product}
-                categories={categories}
-                confidence={confidence}
-                baseUrl={baseUrl}
-                onSaveImage={handleSaveImage}
-                variant="display" // สำหรับผู้ใช้เห็น
-            />
+            <div className="pb-[40px]">
+                <ImageCard     
+                    name={name}
+                    product={product}
+                    categories={categories}
+                    confidence={confidence}
+                    baseUrl={baseUrl}
+                    onSaveImage={handleSaveImage}
+                    variant="display" // สำหรับผู้ใช้เห็น
+                />
+            </div>
+            {/* <div className="pb-[40px]"/> */}
             {/* Save Image Here */}
-            <div ref={divRef} className="absolute opacity-0 -z-50 w-full h-full flex justify-center items-center">
+            <div ref={divRef} className="absolute opacity-0 -z-50 w-full flex justify-center items-center py-[50px]">
                 <ImageCard     
                     name={name}
                     product={product}
@@ -89,10 +92,10 @@ export default function Result() {
                     baseUrl={baseUrl}
                     onSaveImage={handleSaveImage}
                     variant="capture" // สำหรับผู้ใช้เห็น
-                    className="h-full flex justify-center items-center"
+                    className="flex justify-center items-center"
                 />
                 <Image 
-                    className="absolute -z-10"
+                    className="absolute -z-10 bg-cover h-screen min-h-full"
                     src={`${baseUrl}/images/result-background-download.jpg`} 
                     alt="Result Background Downlolad" width={1254} height={2223} 
                 />

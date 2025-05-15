@@ -8,7 +8,7 @@ interface HeartProps {
 }
 
 export default function Heart({ isDragging, checkedItems, setCheckedItems }: Readonly<HeartProps>) {
-    const id = "big-self"
+    const id = "ตัวเธอเอง"
     const checked = checkedItems?.[id] ?? false
     const handleChange = (checked: boolean) => {
         if (isDragging) return

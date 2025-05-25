@@ -42,7 +42,7 @@ export default function ItemDetailClient() {
                         <div>คำอธิบายสินค้า</div>
                         <div className="flex-1 h-px bg-black" />
                     </div>
-                    <div>
+                    <div className="text-[14px]">
                         {product.description.map((desc, index) => (
                             <div key={`line-${index}-${desc.at(0)}`}>{desc}</div>
                         ))}

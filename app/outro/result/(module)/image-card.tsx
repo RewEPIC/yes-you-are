@@ -91,24 +91,24 @@ export default function ImageCard({
                     <div className="flex-1 flex flex-col items-start gap-y-[5px]">
                         {confidence[0] && (
                             <div>
-                                40% <span className="font-[400]">{confidence[0]}</span>
+                                <span className="text-primary-pink-dark">40%</span> <span className="font-[400]">{confidence[0]}</span>
                             </div>
                         )}
                         {confidence[2] && (
                             <div>
-                                20% <span className="font-[400]">{confidence[2]}</span>
+                                <span className="text-primary-pink-dark">20%</span> <span className="font-[400]">{confidence[2]}</span>
                             </div>
                         )}
                     </div>
                     <div className="flex-1 flex flex-col items-start gap-y-[5px]">
                         {confidence[1] && (
                             <div>
-                                30% <span className="font-[400]">{confidence[1]}</span>
+                                <span className="text-primary-pink-dark">30%</span> <span className="font-[400]">{confidence[1]}</span>
                             </div>
                         )}
                         {confidence[3] && (
                             <div>
-                                10% <span className="font-[400]">{confidence[3]}</span>
+                                <span className="text-primary-pink-dark">10%</span> <span className="font-[400]">{confidence[3]}</span>
                             </div>
                         )}
                     </div>

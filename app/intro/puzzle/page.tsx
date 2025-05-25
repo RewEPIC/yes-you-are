@@ -36,30 +36,11 @@ function PuzzleButton({ label, src, id, checkedItems, handleChange, className }:
             />
             {label}
         </div>
-        // <div
-        //     className={clsx(
-        //         "z-90 w-[287px] h-[287px] pointer-events-auto cursor-pointer flex items-center justify-center transition ease-in-out duration-200",
-        //         isChecked ? "" : "grayscale",
-        //         className
-        //     )}
-        // >
-        //     <MaskedClickableImage
-        //         width={287}
-        //         height={287}
-        //         autoDetectMask={true}
-        //         backgroundImage={src}
-        //         onMaskClick={() => handleChange(id, !isChecked)}
-        //         fillColor="transparent"
-        //         strokeColor="transparent"
-        //         className="absolute w-full h-full"
-        //     />
-        //     {label}
-        // </div>
     )
 }
 
 export default function Puzzle() {
-    const [checkedItems, setCheckedItems] = useState<CheckedItem>({})
+    const [checkedItems, setCheckedItems] = useState<CheckedItem>({ passionate: true })
     const router = useRouter()
     const handleSubmit = () => {
         router.push("/intro/look")

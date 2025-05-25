@@ -1,4 +1,6 @@
 "use client";
+import { tagOne } from "@/app/intro/confidence/(constant)/tag-one";
+import { tagTwo } from "@/app/intro/confidence/(constant)/tag-two";
 import Heart from "@/app/intro/confidence/(module)/heart";
 import HeartSeperate, { CheckedItem } from "@/app/intro/confidence/(module)/heart-seperate";
 import BackgroundLayout from "@/components/background-layout";
@@ -12,24 +14,24 @@ import { useEffect, useState } from "react";
 export default function Confidence() {
     const [page, setPage] = useState(0);
     const [checkedItems, setCheckedItems] = useState<CheckedItem>({})
-    const [isDragging, setIsDragging] = useState(false); // Track drag state
+    const [isDragging, setIsDragging] = useState(false);
     const controls = useAnimation();
     const router = useRouter()
 
-    // Use animation controls for more reliable transitions
-    useEffect(() => {
-        // Animate to the current page position
+    const snapToPage = (pageNumber: number) => {
         controls.start({
-            x: page === 0 ? "0%" : "-50%",
+            x: `${-pageNumber * 33.33}%`,
             transition: {
-                type: "tween", // Use tween for more reliable animation
-                ease: "easeInOut",
-                duration: 0.5
+                duration: 0.5,
+                ease: [0.32, 0.72, 0, 1]
             }
         });
-    }, [page, controls]);
+    };
 
-    // Handle submission logic
+    useEffect(() => {
+        snapToPage(page);
+    }, [page]);
+
     const handleSubmit = () => {
         const size = Object.values(checkedItems).filter(Boolean).length
         if (size <= 0) {
@@ -41,27 +43,21 @@ export default function Confidence() {
             localStorage.setItem("confidence", Object.keys(checkedItems).join(","))
         }
     };
+
     const handleDragStart = () => { 
         setIsDragging(true)
     }
-    // Handle drag end with reliable transition
+
     const handleDragEnd = (event: MouseEvent, info: PanInfo) => {
-        setIsDragging(false)
-        // Apply page change based on drag offset
-        if (info.offset.x < -50 && page === 0) {
-            setPage(1);
-        } else if (info.offset.x > 50 && page === 1) {
-            setPage(0);
+        setIsDragging(false);
+        const swipeThreshold = 50;
+
+        if (info.offset.x < -swipeThreshold && page < 2) {
+            setPage(page + 1);
+        } else if (info.offset.x > swipeThreshold && page > 0) {
+            setPage(page - 1);
         } else {
-            // If not enough drag to change page, snap back
-            controls.start({
-                x: page === 0 ? "0%" : "-50%",
-                transition: {
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30
-                }
-            });
+            snapToPage(page);
         }
     };
 
@@ -75,19 +71,22 @@ export default function Confidence() {
                 </div>
 
                 <div className="flex flex-col w-full">
-                    <div className="relative">
+                    <div className="relative w-full overflow-hidden">
                         <motion.div
-                            className="flex w-[200%]"
+                            className="flex w-[300%]"
                             animate={controls}
                             initial={{ x: "0%" }}
                             drag="x"
                             onDragStart={handleDragStart}
                             onDragEnd={handleDragEnd}
                         >
-                            <div className="w-1/2 flex flex-col items-center justify-center">
-                                <HeartSeperate isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
+                            <div className="w-1/3 flex-shrink-0 flex flex-col items-center justify-center">
+                                <HeartSeperate tags={tagOne} isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                             </div>
-                            <div className="w-1/2 flex flex-col items-center justify-center">
+                            <div className="w-1/3 flex-shrink-0 flex flex-col items-center justify-center">
+                                <HeartSeperate tags={tagTwo} isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
+                            </div>
+                            <div className="w-1/3 flex-shrink-0 flex flex-col items-center justify-center">
                                 <Heart isDragging={isDragging} checkedItems={checkedItems} setCheckedItems={setCheckedItems} />
                             </div>
                         </motion.div>
@@ -105,12 +104,18 @@ export default function Confidence() {
                                 onClick={() => setPage(1)}
                                 className={`size-[10px] rounded-full cursor-pointer ${page === 1 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`}
                             />
+                            <button
+                                onClick={() => setPage(2)}
+                                className={`size-[10px] rounded-full cursor-pointer ${page === 2 ? 'bg-bullet-active' : 'bg-bullet-inactive'}`}
+                            />
                         </div>
                         <div className="font-400 text-[15px] text-primary-gray">
-                            {page === 0 ? "ปัดซ้ายเพื่อดูเพิ่ม" : "ปัดขวาเพื่อกลับ"}
+                            {page === 0 ? "ปัดซ้ายเพื่อดูเพิ่ม" : page === 1 ? "ปัดซ้ายหรือขวาเพื่อดูเพิ่ม" : "ปัดขวาเพื่อกลับ"}
                         </div>
                     </div>
-                    <PinkButton onClick={handleSubmit} />
+                    <div className="flex justify-center">
+                        <PinkButton onClick={handleSubmit} />
+                    </div>
                 </div>
             </div>
         </BackgroundLayout>

@@ -12,7 +12,7 @@ interface TagProps {
 export default function Tag({ id, text, className, checked, onChange }: Readonly<TagProps>) {
     const checkedStyles = !checked ? {
         backgroundRepeat: "repeat",
-        backgroundImage: `url('${baseUrl}/svgs/frame.svg')`,
+        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('${baseUrl}/svgs/frame.svg')`,
         backgroundSize: "100px 100px",
         backgroundPosition: "center",
         backgroundAttachment: "local"

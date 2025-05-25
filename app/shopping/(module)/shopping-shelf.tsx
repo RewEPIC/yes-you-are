@@ -1,5 +1,6 @@
 import { products } from "@/lib/dictionary/products";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ShoppingShelfProps {
   products: typeof products[keyof typeof products][];
@@ -7,6 +8,7 @@ interface ShoppingShelfProps {
 }
 
 export default function ShoppingShelf({ products, startIdx }: Readonly<ShoppingShelfProps>) {
+  const router = useRouter()
   return (
     <div className="w-full">
       <div className="flex justify-center items-center">
@@ -19,12 +21,15 @@ export default function ShoppingShelf({ products, startIdx }: Readonly<ShoppingS
               <Image
                 key={`item-${index}`}
                 // src={`${baseUrl}/images/shopping/items/${category}/${index}.png`}
+                onClick={() => {
+                  router.push(`/shopping/items/${product.id}`)
+                }}
                 src={product.image}
                 alt={`item-${index}`}
                 width={80}
                 height={100}
                 loading="lazy"
-                className="-mb-[45px] justify-self-center"
+                className="-mb-[45px] justify-self-center cursor-pointer"
               />
             );
           })}

@@ -1,4 +1,5 @@
 'use client';
+import { useSound } from '@/hook/useSound';
 import { baseUrl } from '@/lib/config';
 import { products } from '@/lib/dictionary/products';
 import { pgGrandCanyon } from '@/lib/font';
@@ -52,6 +53,7 @@ interface ShuffleCardsProps {
 
 export default function ShuffleCards({ onClick }: Readonly<ShuffleCardsProps>) {
   const shuffleCards = useMemo(() => shuffleArray(cards), [])
+  const { toggle } = useSound(`${baseUrl}/audios/shuffle.mp3`);
   const product = useMemo(() => randomProduct(), [])
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -65,6 +67,9 @@ export default function ShuffleCards({ onClick }: Readonly<ShuffleCardsProps>) {
     if (!isSpinning) {
       setIsSpinning(true);
 
+      setTimeout(() => {
+        toggle()
+      }, 100)
       // Complete one full spin
       setTimeout(() => {
         setIsFlipped(!isFlipped);

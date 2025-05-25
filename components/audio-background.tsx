@@ -19,6 +19,7 @@ const AudioBackground = forwardRef<AudioBackgroundHandle, AudioBackgroundProps>(
       if (audioRef.current) {
         audioRef.current.muted = false;
         audioRef.current.currentTime = 0
+        audioRef.current.volume = 0.1
         audioRef.current.play().catch(console.warn);
       }
     },

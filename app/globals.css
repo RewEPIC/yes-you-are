@@ -5,6 +5,7 @@
     --color-blue: #C5E8FE;
     --color-blue-light: #E1F3FF;
     --color-shelf-cream:  #FFEFE7;
+    --color-shelf-pink: #FFE7E7;
     --color-primary-dark-gray: #404040;
     --color-brownie: #3D3A38;
     --color-dark-gray: #949494;
@@ -14,6 +15,7 @@
     --color-gray-box: #ECECEC;
     --color-pink-red: #FB6E80; 
     --color-primary-pink: #F67EA8;
+    --color-primary-pink-dark: #FF78A5;
     --color-pink: #FD90BC;
     --color-pink-light-2: #F19EC2;
     --color-pink-light: #FCD2E3;
@@ -40,4 +42,5 @@
     --shadow-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
     --shadow-big-card: 0px 4px 6.4px -3px rgba(0, 0, 0, 0.25);
     --drop-shadow-heart: 0px 3px 10px rgba(0, 0, 0, 0.25);
+    --drop-shadow-button: 0px 5px 2px rgba(241, 158, 194, 0.5);
 }

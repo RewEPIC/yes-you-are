@@ -25,9 +25,18 @@ const categories = [
     },
 ]
 const categoriesProduct = [
-    [products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position],
-    [products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror],
-    [products.crown, products.card, products.book, products.bracelet, products.key, products.amulet]
+    [
+        products.shoes, products.lottery, products.certificate, products.salary, products.job, products.position,
+        products.glasses, products.timelapse_capsule, products.game_controller, products.game_simulator, products.sugar_bracelet, products.relife_pen
+    ],
+    [
+        products.pen, products.pill, products.camera, products.potion, products.headphones, products.mirror,
+        products.anti_imposter_pin, products.universe_approved, products.level, products.no_comment_today_gift, products.sticker, products.right_amulet
+    ],
+    [
+        products.crown, products.card, products.book, products.bracelet, products.key, products.amulet,
+        products.crystal_ball, products.eye_patch, products.pillow
+    ]
 ]
 
 export default function ItemsPage() {

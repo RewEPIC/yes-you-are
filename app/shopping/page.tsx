@@ -68,19 +68,19 @@ const categories = [
     { 
         icon: `${baseUrl}/images/shopping/category/trophy-icon.png`, label: "ความสำเร็จ", products: [
             products.shoes, products.certificate, products.lottery, 
-            products.pen, products.salary, products.position
+            products.job, products.salary, products.position
         ]
     },
     { 
         icon: `${baseUrl}/images/shopping/category/heart-icon.png`, label: "ความมั่นใจ", products: [
             products.pill, products.headphones, products.potion,
-            products.camera, products.mirror
+            products.camera, products.mirror, products.pen
         ]   
     },
     { 
         icon: `${baseUrl}/images/shopping/category/message-icon.png`, label: "การยอมรับ", products: [
             products.book, products.card, products.key,
-            products.bracelet, products.amulet
+            products.bracelet, products.amulet, products.crown
         ] 
     },
 ];
@@ -124,48 +124,55 @@ export default function Shopping() {
                 ))}
             </div>
             {/* Category */}
-            <div className="pt-[16px] flex flex-col items-center justify-center space-y-[19px]" >
-                <div className="text-black font-[700] text-[14px]">เลือกหมวดหมู่ที่เธอต้องการ</div>
-                <div className="flex space-x-[17px]">
-                    {categories.map(({ icon, label }, index) => (
-                        <CategoryButton
-                            key={label}
-                            active={index === category}
-                            onClick={() => handleCategoryClick(index)}
-                        >
-                            <Image priority={true} src={icon} alt={label} width={40} height={40} quality={80} />
-                            <div className="text-[11px] font-[500]">{label}</div>
-                        </CategoryButton>
-                    ))}
-                </div>
-                {/* Shelf Sections */}
-                <div className="relative overflow-x-hidden w-full"> {/* Adjust height as needed */}
-                    <div
-                        className="flex transition-transform duration-1000 ease-in-out"
-                        style={{
-                            transform: `translateX(-${category * 100}%)`,
-                            width: `${categories.length + 1 * 100}%`,
-                        }}
-                    >
-                        {categories.map((cat, idx) => (
-                            <div key={`shelf-group-${idx}-${cat.label}`} className="w-full shrink-0 space-y-[18px]">
-                                {[0, 3].map((startIdx) => (
-                                    <ShoppingShelf
-                                        key={`shelf-${idx}-${startIdx}`}
-                                        products={cat.products}
-                                        startIdx={startIdx}
-                                    />
-                                ))}
-                            </div>
+            <div className="pt-[16px] flex flex-col items-center justify-center" >
+                <div className="flex flex-col items-center justify-center space-y-[19px]">
+                    <div className="text-black font-[700] text-[14px]">เลือกหมวดหมู่ที่เธอต้องการ</div>
+                    <div className="flex space-x-[17px]">
+                        {categories.map(({ icon, label }, index) => (
+                            <CategoryButton
+                                key={label}
+                                active={index === category}
+                                onClick={() => handleCategoryClick(index)}
+                            >
+                                <Image priority={true} src={icon} alt={label} width={40} height={40} quality={80} />
+                                <div className="text-[11px] font-[500]">{label}</div>
+                            </CategoryButton>
                         ))}
+                    </div>
+                    {/* Shelf Sections */}
+                    <div className="relative overflow-x-hidden w-full"> {/* Adjust height as needed */}
+                        <div
+                            className="flex transition-transform duration-1000 ease-in-out"
+                            style={{
+                                transform: `translateX(-${category * 100}%)`,
+                                width: `${categories.length + 1 * 100}%`,
+                            }}
+                        >
+                            {categories.map((cat, idx) => (
+                                <div key={`shelf-group-${idx}-${cat.label}`} className="w-full shrink-0 space-y-[18px]">
+                                    {[0, 3].map((startIdx) => (
+                                        <ShoppingShelf
+                                            key={`shelf-${idx}-${startIdx}`}
+                                            products={cat.products}
+                                            startIdx={startIdx}
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 {/* Shopping Button */}
-                <button
-                    onClick={handleOpenShopping}
-                    className="cursor-pointer bg-primary-pink rounded-[3px] w-[97px] h-[28px] flex items-center justify-center text-white font-[700] text-[13px]">
-                    SHOPPING
-                </button>
+                <div className="bg-shelf-pink w-full flex flex-col justify-center items-center pt-[41px] pb-[39px] space-y-[7px]">
+                    <div className="font-[700] text-[15px]">ยินดีต้อนรับสู่พื้นที่ปลอดภัยของเธอ :)</div>
+                    <div className="font-[500] text-[15px]">มาเลือกสิ่งที่ใจต้องการ แล้วเริ่มเปลี่ยนชีวิตได้เลย</div>
+                    <Image 
+                        onClick={handleOpenShopping}
+                        className="drop-shadow-button cursor-pointer" 
+                        src={`${baseUrl}/images/shopping/shopping-button.png`} 
+                        alt="shopping-button" width={264} height={74} 
+                    />
+                </div>
                 {/* Random Section */}
                 <div
                     style={{ backgroundImage: `url('${baseUrl}/images/shopping/random/shopping-background.png')` }}

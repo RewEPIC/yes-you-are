@@ -6,9 +6,9 @@ import { baseUrl } from "@/lib/config";
 import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
 
-function GradientText({ children }: Readonly<{ children: React.ReactNode }>) {
-    return (<span className="bg-gradient-to-b from-pink-light to-pink bg-clip-text text-transparent py-4">{children}</span>)
-}
+// function GradientText({ children }: Readonly<{ children: React.ReactNode }>) {
+//     return (<span className="bg-gradient-to-b from-pink-light to-pink bg-clip-text text-transparent py-4">{children}</span>)
+// }
 
 export default function OutroAffirmation() {
     const router = useRouter()

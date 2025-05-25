@@ -30,7 +30,7 @@ export default function Confidence() {
 
     useEffect(() => {
         snapToPage(page);
-    }, [page]);
+    }, [page, snapToPage]);
 
     const handleSubmit = () => {
         const size = Object.values(checkedItems).filter(Boolean).length

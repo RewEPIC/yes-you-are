@@ -9,7 +9,7 @@ import PinkText from "@/components/text/pink-text";
 import { pgGrandCanyon } from "@/lib/font";
 import { motion, PanInfo, useAnimation } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function Confidence() {
     const [page, setPage] = useState(0);
@@ -18,7 +18,7 @@ export default function Confidence() {
     const controls = useAnimation();
     const router = useRouter()
 
-    const snapToPage = (pageNumber: number) => {
+    const snapToPage = useCallback((pageNumber: number) => {
         controls.start({
             x: `${-pageNumber * 33.33}%`,
             transition: {
@@ -26,7 +26,7 @@ export default function Confidence() {
                 ease: [0.32, 0.72, 0, 1]
             }
         });
-    };
+    }, [controls])
 
     useEffect(() => {
         snapToPage(page);

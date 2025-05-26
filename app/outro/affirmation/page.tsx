@@ -5,35 +5,39 @@ import { useSound } from "@/hook/useSound";
 import { baseUrl } from "@/lib/config";
 import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function OutroAffirmation() {
     const router = useRouter()
     const { toggle } = useSound(`${baseUrl}/audios/print.mp3`)
+    const [selectedAffirmation, setSelectedAffirmation] = useState<React.ReactNode | null>(null)
+    
     const handleClickResult = () => {
         setTimeout(() => {
             toggle()
-        }, 100)
+        }, 300)
         router.push("/outro/result")
     }
-    const affirmations = [
+    
+    const affirmations: React.ReactNode[] = [
         (
             <>
-                <div>หวังว่าสิ่งที่เธอ “เลือก” ไป จะค่อยๆ</div>
+                <div>หวังว่าสิ่งที่เธอ "เลือก" ไป จะค่อยๆ</div>
                 <div>ทำให้เธอเห็นว่าเธอไม่ต้องแสร้งเป็นใครเลย</div>
                 <div>เพราะเธอ <span className={`text-primary-pink-dark ${pgGrandCanyon.className}`}>ในแบบที่เป็นอยู่</span> ก็ดีมากพอแล้ว</div>
             </>
         ),
         (
             <>
-                <div>“ตัวเธอ” ไม่สามารถเป็นคนอื่นได้</div>
-                <div>คนอื่นก็ไม่สามารถแทนที่ “ตัวเธอ” ได้เช่นกัน</div>
+                <div>"ตัวเธอ" ไม่สามารถเป็นคนอื่นได้</div>
+                <div>คนอื่นก็ไม่สามารถแทนที่ "ตัวเธอ" ได้เช่นกัน</div>
                 <div>เพราะเธอมีหนึ่งเดียว <span className={`text-primary-pink-dark ${pgGrandCanyon.className}`}>พิเศษในแบบที่เธอเป็น</span></div>
             </>
         ),
         (
             <>
                 <div>คงจะฟังดูแปลก ถ้าเราจะบอกว่า</div>
-                <div>อยากให้เธอได้รับ “สินค้า” นั้นไป</div>
+                <div>อยากให้เธอได้รับ "สินค้า" นั้นไป</div>
                 <div>และ<span className={`text-primary-pink-dark ${pgGrandCanyon.className}`}>ไม่รู้สึกต้องการร้านค้าของเรา</span>อีกแล้ว</div>
                 <br/>
                 <div>แต่เมื่อไหร่ที่เธอยังต้องการ เราพร้อมต้อนรับเธอเสมอ</div>
@@ -50,10 +54,21 @@ export default function OutroAffirmation() {
             </> 
         )
     ]
-    const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)]
+    
+    // Select random affirmation only once when component mounts
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * affirmations.length)
+        setSelectedAffirmation(affirmations[randomIndex])
+    }, [])
+    
+    // Don't render until affirmation is selected to prevent flash
+    if (!selectedAffirmation) {
+        return null
+    }
+    
     return (
         <BackgroundLayout className="flex flex-col justify-center items-center font-[500] text-[13px] space-y-[50px]">
-            <div className="text-center">{randomAffirmation}</div>
+            <div className="text-center">{selectedAffirmation}</div>
             <PinkButton name="ไปรับใบเสร็จของเธอกันเลย!" onClick={handleClickResult} className="w-fit font-itim px-[16px]" />
         </BackgroundLayout>
     )

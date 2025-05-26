@@ -1,6 +1,5 @@
 // shopping/page.tsx
 "use client";
-
 import ShoppingShelf from "@/app/shopping/(module)/shopping-shelf";
 import ShuffleCards from "@/app/shopping/(module)/shuffle-card";
 import CategoryButton from "@/components/buttons/category-button";
@@ -166,12 +165,33 @@ export default function Shopping() {
                 <div className="bg-shelf-pink w-full flex flex-col justify-center items-center pt-[41px] pb-[39px] space-y-[7px]">
                     <div className="font-[700] text-[15px]">ยินดีต้อนรับสู่พื้นที่ปลอดภัยของเธอ :)</div>
                     <div className="font-[500] text-[15px]">มาเลือกสิ่งที่ใจต้องการ แล้วเริ่มเปลี่ยนชีวิตได้เลย</div>
-                    <Image 
+                    {/* <Lottie 
                         onClick={handleOpenShopping}
-                        className="drop-shadow-button cursor-pointer" 
-                        src={`${baseUrl}/images/shopping/shopping-button.png`} 
-                        alt="shopping-button" width={264} height={74} 
-                    />
+                        className="w-[264px] h-[74px] cursor-pointer bg-white" 
+                        loop={true} 
+                        autoplay={true}
+                        muted={true} 
+                        playsInline={true} 
+                        animationData={ShoppingButton} 
+                        width={264} height={74}
+                        rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
+                    /> */}
+                    <button 
+                        className="flex justify-center items-center w-[264px] h-[74px] overflow-hidden bg-shelf-pink"
+                        onClick={handleOpenShopping}
+                    >
+                        <video
+                            loop={true}
+                            autoPlay={true}
+                            muted={true}
+                            playsInline={true}
+                            className="w-full cursor-pointer bg-white"
+                            src={`${baseUrl}/videos/shopping-button.mp4`}
+                            width={264}
+                            height={74}
+                            
+                        />
+                    </button>
                 </div>
                 {/* Random Section */}
                 <div

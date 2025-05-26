@@ -100,7 +100,7 @@ export default function ItemsPage() {
                                     <Image loading="lazy" src={currentProduct[index].image} alt={currentProduct[index].name} className="w-[120px] h-[140px]" width={540} height={675} />
                                 </div>
                                 <div className="p-[12px]">
-                                    <div className="font-[300] text-[10px]">ความสำเร็จ</div>
+                                    <div className="font-[300] text-[10px]">{currentCategory.label}</div>
                                     <div className="font-[600] text-[12px]">{currentProduct[index].name}</div>
                                 </div>
                             </Link>

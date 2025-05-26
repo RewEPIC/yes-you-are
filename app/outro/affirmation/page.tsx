@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 export default function OutroAffirmation() {
     const router = useRouter()
-    const { toggle } = useSound(`${baseUrl}/audios/shuffle.mp3`)
+    const { toggle } = useSound(`${baseUrl}/audios/print.mp3`)
     const handleClickResult = () => {
         router.push("/outro/result")
         setTimeout(() => {

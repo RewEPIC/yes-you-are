@@ -29,33 +29,51 @@ export default function Result() {
         setConfidence(storedConfidence?.split(",") ?? [])
     }, [])
 
-
     const handleSaveImage = async () => {
         if (!divRef.current) return;
-        // เปิด visibility ชั่วคราว
+        
+        // Store original styles
+        const originalStyles = {
+            visibility: divRef.current.style.visibility,
+            opacity: divRef.current.style.opacity,
+            position: divRef.current.style.position,
+            top: divRef.current.style.top,
+            left: divRef.current.style.left,
+            zIndex: divRef.current.style.zIndex
+        };
+
+        // Move off-screen but make visible for html2canvas
         divRef.current.style.visibility = "visible";
         divRef.current.style.opacity = "1";
-        divRef.current.style.position = "absolute";
-        divRef.current.style.top = "0";
-        divRef.current.style.left = "0";
+        divRef.current.style.position = "fixed";
+        divRef.current.style.top = "-10000px";
+        divRef.current.style.left = "-10000px";
+        divRef.current.style.zIndex = "-9999";
 
-        const canvas = await html2canvas(divRef.current, {
-            useCORS: true,
-            allowTaint: false,
-            backgroundColor: null,
-        });
+        try {
+            const canvas = await html2canvas(divRef.current, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: null,
+                width: 540,
+                height: 960,
+            });
 
-        // กลับสู่เดิม
-        divRef.current.style.visibility = "hidden";
-        divRef.current.style.opacity = "0";
-        divRef.current.style.position = "absolute";
-
-        const dataURL = canvas.toDataURL('image/png');
-        const link = document.createElement("a");
-        link.href = dataURL;
-        link.download = "yes-you-are-receipt.png";
-        link.click();
-
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "yes-you-are-receipt.png";
+            link.click();
+        } finally {
+            // Restore original styles
+            divRef.current.style.visibility = originalStyles.visibility;
+            divRef.current.style.opacity = originalStyles.opacity;
+            divRef.current.style.position = originalStyles.position;
+            divRef.current.style.top = originalStyles.top;
+            divRef.current.style.left = originalStyles.left;
+            divRef.current.style.zIndex = originalStyles.zIndex;
+        }
     };
 
     return (
@@ -71,7 +89,7 @@ export default function Result() {
             <div className="h-[54px] w-[328px] bg-white rounded-[16px] shadow-blue z-10" />
             <div className="absolute h-[54px] w-[328px] top-[27px] bg-pink-light-2 -z-10 rounded-[16px]" />
             <div className="pb-[40px]">
-                <ImageCard     
+                <ImageCard
                     name={name}
                     product={product}
                     categories={categories}
@@ -83,7 +101,7 @@ export default function Result() {
             </div>
             {/* <div className="pb-[40px]"/> */}
             {/* Save Image Here */}
-            <div ref={divRef} className="absolute opacity-0 -z-50 w-full flex justify-center items-center py-[50px]">
+            <div ref={divRef} className="fixed invisible opacity-0 pointer-events-none -z-50 w-[540px] h-[960px] flex justify-center items-center overflow-hidden left-0 top-0">
                 <ImageCard     
                     name={name}
                     product={product}
@@ -91,15 +109,18 @@ export default function Result() {
                     confidence={confidence}
                     baseUrl={baseUrl}
                     onSaveImage={handleSaveImage}
-                    variant="capture" // สำหรับผู้ใช้เห็น
-                    className="flex justify-center items-center"
+                    variant="capture"
+                    className="w-full h-full flex justify-center items-center"
                 />
                 <Image 
-                    className="absolute -z-10 bg-cover h-screen min-h-full"
+                    className="absolute -z-10 object-cover h-full w-full"
                     src={`${baseUrl}/images/result-background-download.jpg`} 
-                    alt="Result Background Downlolad" width={1254} height={2223} 
+                    alt="Result Background Download" 
+                    width={540} 
+                    height={960}
+                    priority
                 />
-            </div>                  
+            </div>
         </div>
     )
 }

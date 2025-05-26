@@ -41,13 +41,15 @@ export default function ImageCard({
         <div
             className={`flex flex-col justify-start items-center w-[291px] h-fit pt-[39px] pb-[49px] space-y-[16px] bg-white`}
         >
-            <Image
-                src={`${baseUrl}/images/small-logo-black.png`}
-                alt="Small logo black"
-                priority={variant === "display"}
-                width={140}
-                height={69}
-            />
+            <div className="flex items-center justify-center h-[69px] w-[140px]">
+                <Image
+                    src={`${baseUrl}/images/small-logo-black.png`}
+                    alt="Small logo black"
+                    priority={variant === "display"}
+                    width={140}
+                    height={140}
+                />
+            </div>
 
             <div className="flex flex-col justify-center items-center">
                 <div className="text-[14px] font-[400]">ขอมอบสิ่งนี้ให้แก่ {name}</div>

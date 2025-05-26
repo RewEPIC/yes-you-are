@@ -63,7 +63,7 @@ export default function ImageCard({
                 />
                 <div className="flex flex-col text-center items-center space-y-[6px] pt-[18px]">
                     <div className="text-[20px] font-[600]">{product.name}</div>
-                    <div className="font-[300] text-[12px] py-[10px] space-y-[5px]">
+                    <div className="font-[300] text-[12px] py-[10px] leading-[21px]">
                         {product.result.description.map((desc, index) => (
                             <div key={`desc-${index}-${desc.at(1)}`}>{desc}</div>
                         ))}

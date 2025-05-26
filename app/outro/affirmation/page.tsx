@@ -6,18 +6,14 @@ import { baseUrl } from "@/lib/config";
 import { pgGrandCanyon } from "@/lib/font";
 import { useRouter } from "next/navigation";
 
-// function GradientText({ children }: Readonly<{ children: React.ReactNode }>) {
-//     return (<span className="bg-gradient-to-b from-pink-light to-pink bg-clip-text text-transparent py-4">{children}</span>)
-// }
-
 export default function OutroAffirmation() {
     const router = useRouter()
     const { toggle } = useSound(`${baseUrl}/audios/print.mp3`)
     const handleClickResult = () => {
-        router.push("/outro/result")
         setTimeout(() => {
             toggle()
-        }, 300)
+        }, 100)
+        router.push("/outro/result")
     }
     const affirmations = [
         (

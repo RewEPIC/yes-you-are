@@ -1,4 +1,5 @@
 import { AudioProvider } from "@/context/audio-context";
+import { ModalProvider } from "@/context/modal-context";
 import { baiJamjuree, itim, pgGrandCanyon } from "@/lib/font";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
@@ -25,13 +26,15 @@ export default function RootLayout({
       <body
         className={`${baiJamjuree.variable} ${itim.variable} ${pgGrandCanyon.variable} w-screen h-screen font-bai-jamjuree antialiased`}
       >
-        <AudioProvider>
-          <div id="root" className="w-full h-full max-w-md mx-auto">
-            {/* <LayoutWrapper> */}
+        <ModalProvider>
+          <AudioProvider>
+            <div id="root" className="w-full h-full max-w-md mx-auto">
+              {/* <LayoutWrapper> */}
               {children}
-            {/* </LayoutWrapper> */}
-          </div>
-        </AudioProvider>
+              {/* </LayoutWrapper> */}
+            </div>
+          </AudioProvider>
+        </ModalProvider>
       </body>
     </html>
   );

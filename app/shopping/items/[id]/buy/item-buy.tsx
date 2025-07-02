@@ -29,7 +29,7 @@ export default function ItemBuyClient() {
     }
     const handleClickOutro = () => {
         localStorage.setItem("product", id)
-        router.push("/outro/shopping")
+        router.push("/outro/splash")
 
         audio.setAudioSrc(`${baseUrl}/audios/outro.mp3`)
         audio.stopAudio()

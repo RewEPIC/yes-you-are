@@ -7,6 +7,7 @@ import ShoppingBrand from "@/components/container/shopping-brand";
 import TransitionLayout from "@/components/motion/transition-layout";
 import Logo from "@/components/svg/logo";
 import PinkText from "@/components/text/pink-text";
+import { useModalContext } from "@/context/modal-context";
 import { useModal } from "@/hook/useModal";
 import { baseUrl } from "@/lib/config";
 import { products } from "@/lib/dictionary/products";
@@ -87,7 +88,8 @@ const categories = [
 ReactModal.setAppElement('#root');
 
 export default function Shopping() {
-    const shoppingModal = useModal(true);
+    const { hasSeenShoppingModal, markShoppingModalAsSeen } = useModalContext()
+    const shoppingModal = useModal(!hasSeenShoppingModal);
     const shuffleModal = useModal();
     const [category, setCategory] = useState(0);
     const router = useRouter()
@@ -96,12 +98,13 @@ export default function Shopping() {
         shuffleModal.open()
     }
     const handleCloseModal = useCallback(() => {
+        markShoppingModalAsSeen()
         shoppingModal.close();
-      }, [shoppingModal]);
+    }, [shoppingModal, markShoppingModalAsSeen]);
       
-      const handleShuffleModalClose = useCallback(() => {
+    const handleShuffleModalClose = useCallback(() => {
         shuffleModal.close();
-      }, [shuffleModal]);
+    }, [shuffleModal]);
 
     const handleOpenShopping = () => {
         router.push("/shopping/items")
@@ -165,17 +168,6 @@ export default function Shopping() {
                 <div className="bg-shelf-pink w-full flex flex-col justify-center items-center pt-[41px] pb-[39px] space-y-[7px]">
                     <div className="font-[700] text-[15px]">ยินดีต้อนรับสู่พื้นที่ปลอดภัยของเธอ :)</div>
                     <div className="font-[500] text-[15px]">มาเลือกสิ่งที่ใจต้องการ แล้วเริ่มเปลี่ยนชีวิตได้เลย</div>
-                    {/* <Lottie 
-                        onClick={handleOpenShopping}
-                        className="w-[264px] h-[74px] cursor-pointer bg-white" 
-                        loop={true} 
-                        autoplay={true}
-                        muted={true} 
-                        playsInline={true} 
-                        animationData={ShoppingButton} 
-                        width={264} height={74}
-                        rendererSettings={{ preserveAspectRatio: "xMidYMid slice" }}
-                    /> */}
                     <button 
                         className="flex justify-center items-center w-[264px] h-[74px] overflow-hidden bg-shelf-pink"
                         onClick={handleOpenShopping}

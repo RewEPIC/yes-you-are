@@ -1,13 +1,21 @@
 "use client";
-import BackgroundLayout from "@/components/background-layout";
-import Logo from "@/components/svg/logo";
-import { redirect } from "next/navigation";
+
+import Link from "next/link";
 
 export default function Home() {
-  redirect("/intro/splash");
   return (
-    <BackgroundLayout>
-      <Logo/>
-    </BackgroundLayout>
+    <Link
+      className="w-full h-full flex justify-center items-center bg-white"
+      href="/intro/splash"
+    >
+      <video
+        muted
+        loop
+        autoPlay
+        src={"/videos/splash-intro.mp4"}
+        width={400}
+        height={900}
+      />
+    </Link>
   );
 }

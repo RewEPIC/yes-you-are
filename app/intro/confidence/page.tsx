@@ -64,10 +64,13 @@ export default function Confidence() {
     return (
         <BackgroundLayout className="flex flex-col space-y-[79px] overflow-hidden">
             <div className="flex flex-col items-center justify-center space-y-[47px]">
-                <div className={`${pgGrandCanyon.className} -space-x-0.5 text-brownie`}>
-                    <span className="text-shadow-custom">พูดถึง</span>
-                    <PinkText text="ความมั่นใจ" containerClassName="text-[24px]" textClassName="to-pink-red" />
-                    <span className="text-shadow-custom">แล้วเธอนึกถึงอะไร</span>
+                <div className="flex flex-col text-center">
+                    <div className={`${pgGrandCanyon.className} -space-x-0.5 text-brownie`}>
+                        <span className="text-shadow-custom">พูดถึง</span>
+                        <PinkText text="ความมั่นใจ" containerClassName="text-[24px]" textClassName="to-pink-red" />
+                        <span className="text-shadow-custom">แล้วเธอนึกถึงอะไร</span>
+                    </div>
+                    <div className={`${pgGrandCanyon.className} text-[12px] text-brownie`}>(เลือกสูงสุด 4 ตัวเลือก)</div>
                 </div>
 
                 <div className="flex flex-col w-full">

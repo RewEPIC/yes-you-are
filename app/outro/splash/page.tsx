@@ -20,7 +20,6 @@ export default function SplashOutro() {
     >
       <video
         muted
-        loop
         autoPlay
         src={"/videos/splash-outro.mp4"}
         width={450}

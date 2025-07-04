@@ -1,31 +1,37 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useSound = (url: string) => {
-    const [audio] = useState(new Audio(url));
+    const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-    const toggle = () => {
-        if (!isLoading) {
-            setPlaying(!playing);
+    const toggle = useCallback(() => {
+        if (!isLoading && audio) {
+            setPlaying(prev => !prev);
         }
-    };
+    }, [isLoading, audio]);
 
+    // Initialize audio only on client side
     useEffect(() => {
-        audio.addEventListener('canplaythrough', () => {
-            setIsLoading(false);
-        });
+        if (typeof window !== 'undefined') {
+            const audioInstance = new Audio(url);
+            setAudio(audioInstance);
 
-        audio.load();
-
-        return () => {
-            audio.removeEventListener('canplaythrough', () => {
+            const handleCanPlayThrough = () => {
                 setIsLoading(false);
-            });
-        };
-    }, [audio]);
+            };
+
+            audioInstance.addEventListener('canplaythrough', handleCanPlayThrough);
+            audioInstance.load();
+
+            return () => {
+                audioInstance.removeEventListener('canplaythrough', handleCanPlayThrough);
+            };
+        }
+    }, [url]);
 
     useEffect(() => {
+        if (!audio) return;
         if (playing) {
             audio.play().catch(error => {
                 console.error('Error playing audio:', error);
@@ -37,9 +43,13 @@ export const useSound = (url: string) => {
     }, [playing, audio]);
 
     useEffect(() => {
-        audio.addEventListener('ended', () => setPlaying(false));
+        if (!audio) return;
+        const handleEnded = () => setPlaying(false);
+
+        audio.addEventListener('ended', handleEnded);
+
         return () => {
-            audio.removeEventListener('ended', () => setPlaying(false));
+            audio.removeEventListener('ended', handleEnded);
         };
     }, [audio]);
 

@@ -3,6 +3,7 @@ import GrayButton from "@/components/buttons/gray-button"
 import PinkButton from "@/components/buttons/pink-button"
 import Arrow from "@/components/svg/icon/arrow"
 import { useAudio } from "@/context/audio-context"
+import { useSound } from "@/hook/useSound"
 import { baseUrl } from "@/lib/config"
 import { products } from "@/lib/dictionary/products"
 import Image from "next/image"
@@ -16,6 +17,7 @@ export default function ItemBuyClient() {
     const audio = useAudio()
     const product = products[id as keyof typeof products]
     const [name, setName] = useState<string | null>(null)
+    const { toggle } = useSound(`${baseUrl}/audios/intro-outro.mp3`)
 
     useEffect(() => {
         const storedName = localStorage.getItem("name")
@@ -35,8 +37,12 @@ export default function ItemBuyClient() {
         audio.stopAudio()
 
         setTimeout(() => {
+            toggle()
+        }, 50)
+
+        setTimeout(() => {
             audio.playAudio()
-        }, 2500)
+        }, 2500 + 4000)
     }
     
     return (

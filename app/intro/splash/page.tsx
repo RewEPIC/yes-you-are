@@ -11,7 +11,7 @@ export default function Splash() {
     const timer = setTimeout(() => {
       setIntro(true)
       router.push("/intro/name")
-    }, 3000)
+    }, 2900)
     return () => clearTimeout(timer);
   }, [router, intro])
   return (
@@ -20,7 +20,6 @@ export default function Splash() {
     >
       <video
         muted
-        loop
         autoPlay
         src={"/videos/splash-intro-open.mp4"}
         width={400}

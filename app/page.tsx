@@ -13,11 +13,12 @@ export default function Home() {
       onClick={() => toggle()}
     >
       <video
-        muted
-        loop
-        autoPlay
-        playsInline
+        loop={true}
+        autoPlay={true}
+        muted={true}
+        playsInline={true}
         src={"/videos/splash-intro.mp4"}
+        className="w-full h-full object-cover"
         width={400}
         height={900}
       />

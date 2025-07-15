@@ -21,6 +21,7 @@ export default function Splash() {
       <video
         muted
         autoPlay
+        playsInline
         src={"/videos/splash-intro-open.mp4"}
         width={400}
         height={900}

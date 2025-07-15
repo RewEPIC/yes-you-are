@@ -16,6 +16,7 @@ export default function Home() {
         muted
         loop
         autoPlay
+        playsInline
         src={"/videos/splash-intro.mp4"}
         width={400}
         height={900}

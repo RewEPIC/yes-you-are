@@ -21,6 +21,7 @@ export default function SplashOutro() {
       <video
         muted
         autoPlay
+        playsInline
         src={"/videos/splash-outro.mp4"}
         width={450}
         height={900}
